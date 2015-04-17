@@ -3,9 +3,9 @@
 angular.module('energyScannerApp')
   .config(function ($stateProvider) {
     $stateProvider
-      .state('main', {
+      .state('intro', {
         url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'app/routes/intro/intro.html',
+        controller: 'IntroCtrl'
       });
   });
