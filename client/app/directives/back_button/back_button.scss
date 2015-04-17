@@ -1,0 +1,8 @@
+.back-button-container {
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

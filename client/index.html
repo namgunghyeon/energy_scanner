@@ -27,7 +27,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ui-view=""></div>
+    <div ui-view="" class="container"></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -59,8 +59,27 @@
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
-          <script src="app/main/main.controller.js"></script>
-          <script src="app/main/main.js"></script>
+          <script src="app/constant.js"></script>
+          <script src="app/directives/appliance_record/appliance_record.directive.js"></script>
+          <script src="app/directives/back_button/back_button.directive.js"></script>
+          <script src="app/directives/my_appliance/my_appliance.directive.js"></script>
+          <script src="app/directives/sign_in/sign_in.directive.js"></script>
+          <script src="app/routes/intro/intro.controller.js"></script>
+          <script src="app/routes/intro/intro.js"></script>
+          <script src="app/routes/main/main.controller.js"></script>
+          <script src="app/routes/main/main.js"></script>
+          <script src="app/routes/my_appliance_detail/my_appliance_detail.controller.js"></script>
+          <script src="app/routes/my_appliance_detail/my_appliance_detail.js"></script>
+          <script src="app/routes/scan_energy/scan_energy.controller.js"></script>
+          <script src="app/routes/scan_energy/scan_energy.js"></script>
+          <script src="app/routes/scan_history/scan_history.controller.js"></script>
+          <script src="app/routes/scan_history/scan_history.js"></script>
+          <script src="app/routes/sign_up/sign_up.controller.js"></script>
+          <script src="app/routes/sign_up/sign_up.js"></script>
+          <script src="app/services/appliance/appliance.service.js"></script>
+          <script src="app/services/device/device.service.js"></script>
+          <script src="app/services/scanner/scanner.service.js"></script>
+          <script src="app/services/user/user.service.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
