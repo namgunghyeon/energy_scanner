@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('ApplianceCtrl', function ($scope, Appliance) {
+  .controller('ApplianceCtrl', function ($scope, Appliance, $state, $log) {
 
     $scope.back = {
       stateName: 'scanEnergy',
@@ -18,48 +18,34 @@ angular.module('energyScannerApp')
       };
     };
 
+    $scope.applianceIcon = {
+      A1: '/assets/images/icon_refrigerator.png',
+      A2: '/assets/images/icon_kimchirefrigerator.png',
+      A3: '/assets/images/icon_washer.png',
+      A4: '/assets/images/icon_ricepot.png',
+      A5: '/assets/images/icon_etc.png'
+    };
+
     $scope.init = function () {
 
       // GET Appliance API
-      $scope.appliances = [
-        {
-          id: 0,
-          name: '냉장고',
-          icon: '/assets/images/icon_refrigerator.png',
-          modelName: '',
-          mode: ''
-        },
-        {
-          id: 1,
-          name: '김치 냉장고',
-          icon: '/assets/images/icon_kimchirefrigerator.png',
-          modelName: '',
-          mode: ''
-        },
-        {
-          id: 2,
-          name: '세탁기',
-          icon: '/assets/images/icon_washer.png',
-          modelName: '',
-          mode: ''
-        },
-        {
-          id: 3,
-          name: '전기밥솥',
-          icon: '/assets/images/icon_ricepot.png',
-          modelName: '',
-          mode: ''
-        },
-        {
-          id: 4,
-          name: 'Others',
-          icon: '/assets/images/icon_etc.png',
-          modelName: '',
-          mode: ''
-        }
-      ];
+      Appliance.getCode().success(function (response) {
 
-      $scope.selected = {};
+        $scope.appliances = response;
+        $scope.selected = {};
+
+      }).error(function (response) {
+        $log.error('Get appliance code: ', response);
+      });
+
+    };
+
+    $scope.goToScanSetting = function () {
+      $state.go('scanSetting', {
+        appliance: angular.toJson($scope.selected)
+      }, {
+        location: false
+      });
     };
 
   });

@@ -1,0 +1,70 @@
+.scan-setting-container {
+  padding-top: 100px;
+  color: #395b77;
+
+  header {
+
+  }
+
+  section {
+
+    .realtime-graph {
+      height: 300px;
+      line-height: 300px;
+      border: 1px solid #129fdd;
+      margin: 10px auto;
+      text-align: center;
+    }
+
+    .setting {
+      margin-top: 30px;
+
+      .record-option {
+        width: 50%;
+        margin: 0 auto;
+
+        .option-wrapper {
+          border: 1px solid #d4dee5;
+          border-radius: 10px;
+          text-align: center;
+
+          .option {
+            padding: 5px;
+
+            .icon {
+              display: inline-block;
+              width: 10px;
+              height: 10px;
+              content: "";
+              margin-right: 10px;
+            }
+
+            &.checked {
+              background-color: #d4dee5;
+
+              .icon {
+                background: url("../assets/images/img_complete.png") no-repeat center;
+                background-size: 100% 100%;
+              }
+
+            }
+          }
+        }
+
+        .timer {
+          margin-top: 10px;
+          text-align: right;
+
+          input[type="text"] {
+            border: 1px solid #d4dee5;
+            padding: 6px;
+
+            &:focus {
+              border: 1px solid #129fdd;
+            }
+          }
+        }
+      }
+    }
+  }
+}
