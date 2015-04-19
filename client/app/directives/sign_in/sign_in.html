@@ -4,19 +4,19 @@
 
     <form name="signIn">
 
-      <div>
-        <input type="text" placeholder="이메일" ng-model="credential.email">
+      <div class="email-form">
+        <input type="text" placeholder="email@yourdomain.com" ng-model="credential.email">
       </div>
 
-      <div>
-        <input type="password" placeholder="비밀번호" ng-model="credential.password">
+      <div class="password-form">
+        <input type="password" placeholder="password" ng-model="credential.password">
       </div>
 
-      <div>
+      <div class="keep-login-form">
         <input type="checkbox" ng-model="credential.keepLogin" ng-true-value=1 ng-false-value=0> 로그인 상태 유지
       </div>
 
-      <div>
+      <div class="login-button">
         <input type="submit" value="로그인" ng-click="signIn(credential)">
       </div>
 

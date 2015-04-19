@@ -26,7 +26,11 @@ angular.module('energyScannerApp')
 
         }
 
-        var credentialCookie = angular.fromJson($window.atob($cookies.esu || {}));
+        try {
+          var credentialCookie = angular.fromJson($window.atob($cookies.esu));
+        } catch (e) {
+          credentialCookie = {};
+        }
 
         scope.credential = {
           email: credentialCookie.email || '',
