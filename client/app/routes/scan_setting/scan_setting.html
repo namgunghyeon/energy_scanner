@@ -1,0 +1,39 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="scan-setting-container" ng-init="init()">
+
+  <header>
+    <div class="title">
+      <h2>지금 이 순간!</h2>
+      <p>Real time으로 확인하는 초 단위 사용량이예요.</p>
+    </div>
+  </header>
+
+  <section>
+
+    <div id="realtime-graph" class="realtime-graph">그래프 영역</div>
+
+    <div class="setting">
+
+      <h3 ng-bind-html="'&quot;' + appliance.name + ' - ' + appliance.mode + '&quot;'"></h3>
+
+      <div class="record-option">
+        <div class="option-wrapper">
+          <div class="option" ng-repeat="option in recordOptions"
+               ng-class="{checked: selected.option === option}" ng-click="selected.option = option">
+            <span class="icon"></span> {{option.name}}
+          </div>
+        </div>
+        <div class="timer" ng-if="selected.option.id === 'timer'">
+          <input type="text" ng-model="selected.option.minutes"> 분
+        </div>
+
+      </div>
+
+      <button></button>
+
+    </div>
+
+  </section>
+
+</div>

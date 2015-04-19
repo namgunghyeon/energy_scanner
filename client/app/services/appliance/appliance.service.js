@@ -1,16 +1,17 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .factory('Appliance', function (API, User, $log) {
+  .factory('Appliance', function (API, User, $http) {
 
     var userInfo = User.getInfo();
 
     return {
-      getAppliances: function () {
+
+      getCode: function () {
 
         return $http({
           method: 'GET',
-          url: API.APPLIANCES(userInfo.email),
+          url: API.APPLIANCE_CODE,
           headers: {
             'Content-Type': 'application/json'
           }
@@ -18,13 +19,25 @@ angular.module('energyScannerApp')
 
       },
 
-      setDevice: function (appliance) {
+      getAppliances: function () {
+
+        return $http({
+          method: 'GET',
+          url: API.USER_APPLIANCES(userInfo.email),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+      },
+
+      setAppliance: function (appliance) {
 
         appliance = appliance || {};
 
         return $http({
           method: 'POST',
-          url: API.APPLIANCES(userInfo.email),
+          url: API.USER_APPLIANCES(userInfo.email),
           headers: {
             'Content-Type': 'application/json'
           },
