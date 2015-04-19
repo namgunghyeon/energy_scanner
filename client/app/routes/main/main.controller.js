@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope) {
 
   });

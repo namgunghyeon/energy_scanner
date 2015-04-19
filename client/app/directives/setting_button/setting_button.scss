@@ -1,0 +1,37 @@
+.setting-button-container {
+  height: 60px;
+  float: right;
+  position: relative;
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background: url("../assets/images/btn_set.png") no-repeat center;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  .popup {
+    position: absolute;
+    top: 30px;
+    right: 5px;
+    width: 100px;
+    text-align: center;
+    border: 1px solid #129fdd;
+    background-color: #fff;
+
+    .item {
+      color: #798ca7;
+      cursor: pointer;
+
+      &:hover {
+        color: #395b77;
+      }
+    }
+
+    .item:hover {
+
+    }
+  }
+}
