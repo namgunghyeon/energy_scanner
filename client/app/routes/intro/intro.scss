@@ -1,0 +1,26 @@
+.intro-container {
+  width: 80%;
+  margin: 0 auto;
+
+  .title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #395B77;
+    margin-top: 118px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .signup-button {
+    width: 100%;
+    font-size: 14px;
+    color: #129fdd;
+    margin-top: 8px;
+    padding: 12px;
+
+    &:hover {
+      color: #395b77;
+    }
+  }
+
+}
