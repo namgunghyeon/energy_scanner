@@ -5,11 +5,16 @@
 
   .icon {
     width: 40px;
-    height: 40px;
+    height: 60px;
     display: inline-block;
     background: url("../assets/images/btn_set.png") no-repeat center;
+    background-size: 40px 40px;
     vertical-align: middle;
     cursor: pointer;
+
+    &:hover {
+      background-color: #0b89dd;
+    }
   }
 
   .popup {

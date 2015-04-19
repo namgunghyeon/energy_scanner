@@ -1,0 +1,41 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="device-container" ng-init="init()">
+
+  <header>
+    <div class="title">
+      <h2>Energy Scanner List</h2>
+    </div>
+  </header>
+
+  <section>
+
+    <ul class="device-list">
+      <li ng-if="!hasDevices">아직 등록된 디바이스가 없습니다.</li>
+      <li ng-repeat="device in devices" ng-class="{on: device === selected.device}" ng-click="selecteDevice(device)">
+        <input type="radio" class="select-button"> {{device.serial}} ({{device.label}})
+      </li>
+    </ul>
+
+    <div class="register">
+      <div class="register-button" ng-show="!showRegisterForm" ng-click="addNewDeviceForm()">
+        <span class="add-icon"></span> Energy Scanner 추가
+      </div>
+      <div class="register-form" ng-show="showRegisterForm">
+        <h3>New Device</h3>
+        <div class="serial">
+          <input type="text" placeholder="Serial Number" ng-model="newDevice.serial">
+        </div>
+        <div class="label">
+          <input type="text" placeholder="Device Label" ng-model="newDevice.label">
+        </div>
+        <div class="buttons">
+          <button class="cancel" ng-click="register.cancel()">Cancel</button>
+          <button class="confirm" ng-click="register.confirm(newDevice)">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>

@@ -5,6 +5,7 @@ angular.module('energyScannerApp')
 
     if (!User.isLoggedIn()) {
       $state.go('intro');
+      return;
     }
 
     $scope.back = {
