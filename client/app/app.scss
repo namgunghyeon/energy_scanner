@@ -1,8 +1,4 @@
 
-$fa-font-path: "/bower_components/font-awesome/fonts";
-
-@import 'font-awesome/scss/font-awesome';
-
 /**
  * App-wide Styles
  */
@@ -29,11 +25,22 @@ html, body {
     margin: 0;
   }
 
+  ul {
+    margin: 0;
+    list-style: none;
+    padding-left: 0;
+  }
+
   button, input[type="button"] {
     -webkit-appearance: none;
     border: 0;
     background-color: transparent;
     cursor: pointer;
+  }
+
+  input[type="text"], input[type="password"], input[type="submit"] {
+    -webkit-appearance: none;
+    outline: 0;
   }
 }
 
@@ -41,7 +48,8 @@ html, body {
 @media screen and (min-width: 768px) {
   .container {
     max-width: 730px;
-    margin: 0 auto;
+    margin: 0 auto 100px;
+    overflow: auto;
   }
 }
 
@@ -50,7 +58,10 @@ html, body {
 @import 'directives/appliance_record/appliance_record.scss';
 @import 'directives/back_button/back_button.scss';
 @import 'directives/my_appliance/my_appliance.scss';
+@import 'directives/setting_button/setting_button.scss';
 @import 'directives/sign_in/sign_in.scss';
+@import 'routes/appliance/appliance.scss';
+@import 'routes/device/device.scss';
 @import 'routes/intro/intro.scss';
 @import 'routes/main/main.scss';
 @import 'routes/my_appliance_detail/my_appliance_detail.scss';

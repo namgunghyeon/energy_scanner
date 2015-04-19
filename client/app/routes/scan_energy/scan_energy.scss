@@ -1,0 +1,62 @@
+.scan-energy-container {
+  padding-top: 100px;
+  color: #395b77;
+
+  header {
+
+  }
+
+  section {
+
+    .realtime-graph {
+      height: 300px;
+      line-height: 300px;
+      border: 1px solid #129fdd;
+      margin: 10px auto;
+      text-align: center;
+    }
+
+    .connect-button, .scan-button {
+      width: 100%;
+      font-size: 18px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .connect-button {
+      color: #129fdd;
+      background-color: #fff;
+      margin-bottom: 8px;
+
+      &:hover {
+        color: #fff;
+        background-color: #395b77;
+      }
+
+      .scan-icon {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url("../assets/images/img_conncet.png") no-repeat center;
+        background-size: 100% 100%;
+        vertical-align: middle;
+        margin-right: 8px;
+
+        @media (-webkit-min-device-pixel-ratio: 2) {
+          background-image: url("../assets/images/img_conncet@2x.png");
+        }
+      }
+    }
+
+    .scan-button {
+      color: #fff;
+      background-color: #129fdd;
+      border: 0;
+
+      &:hover {
+        background-color: #395b77;
+      }
+    }
+  }
+}

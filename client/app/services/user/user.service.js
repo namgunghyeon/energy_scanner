@@ -8,6 +8,7 @@ angular.module('energyScannerApp')
       this.name = '';
       this.site_hash = '';
       this.site_id = '';
+      this.device_hash = '';
       this.encodedApiKey = 'YTU1ZGVjMDJkMTM2NDRmYmJjNTc0MmE2MTg1Nzc4YzQ=';
     }
 
@@ -48,5 +49,6 @@ angular.module('energyScannerApp')
       isLoggedIn: function () {
         return !!_userInfo.email;
       }
+
     };
   });

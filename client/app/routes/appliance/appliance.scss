@@ -1,0 +1,105 @@
+.appliance-container {
+  padding-top: 100px;
+  color: #395B77;
+
+  header {
+
+    .title {
+      text-align: center;
+    }
+  }
+
+  section {
+
+    .appliance-frame {
+      width: 50%;
+      float: left;
+      text-align: center;
+      padding-top: 50px;
+
+      .appliance {
+        width: 50%;
+        margin: 0 auto;
+        cursor: pointer;
+
+        img {
+          display: inline-block;
+          width: 50%;
+          min-width: 60px;
+          opacity: 0.8;
+        }
+
+        p {
+          color: #798ca7;
+        }
+
+        &:hover {
+
+          img {
+            opacity: 1;
+          }
+
+          p {
+            color: #395B77;
+          }
+        }
+      }
+
+      &.setting {
+        width: 100%;
+
+        .appliance {
+          width: 30%;
+        }
+
+        .appliance-setting {
+          padding-top: 20px;
+
+          .model, .mode, .name {
+            margin-top: 8px;
+
+            h4 {
+              text-align: left;
+            }
+
+            input[type="text"] {
+              width: 100%;
+              padding: 12px;
+              font-size: 14px;
+              color: #395B77;
+              background-color: #f6f9fb;
+              border: 1px solid #d4dee5;
+
+              &:focus {
+                border: 1px solid #129fdd;
+              }
+            }
+          }
+
+          .start-button {
+            width: 50%;
+            margin: 30px auto 0;
+            padding: 16px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #798ca7;
+
+            .icon {
+              display: inline-block;
+              width: 8px;
+              height: 11px;
+              background: url("../assets/images/img_next.png") no-repeat center;
+              background-size: 100% 100%;
+            }
+
+            &:hover {
+              color: #395B77;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+}

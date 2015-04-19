@@ -1,16 +1,38 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .factory('appliance', function () {
-    // Service logic
-    // ...
+  .factory('Appliance', function (API, User, $log) {
 
-    var meaningOfLife = 42;
+    var userInfo = User.getInfo();
 
-    // Public API here
     return {
-      someMethod: function () {
-        return meaningOfLife;
+      getAppliances: function () {
+
+        return $http({
+          method: 'GET',
+          url: API.APPLIANCES(userInfo.email),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+      },
+
+      setDevice: function (appliance) {
+
+        appliance = appliance || {};
+
+        return $http({
+          method: 'POST',
+          url: API.APPLIANCES(userInfo.email),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            serial: appliance.serial,
+            hash: appliance.hash
+          }
+        });
       }
     };
   });

@@ -1,5 +1,24 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="scan-energy-container">
+<div class="scan-energy-container" ng-init="init()">
+
+  <header>
+    <div class="title">
+      <h2>지금 이 순간!</h2>
+      <p>Real time으로 확인하는 초 단위 사용량이예요.</p>
+    </div>
+  </header>
+
+  <section>
+
+    <div id="realtime-graph" class="realtime-graph">그래프 영역</div>
+
+    <div class="connect-button" ui-sref="device">
+      <span class="scan-icon"></span> Energy Scanner 연결
+    </div>
+
+    <div class="scan-button" ng-if="hasDevices" ui-sref="appliance">SCAN</div>
+
+  </section>
 
 </div>
