@@ -24,17 +24,17 @@
 
         <div class="model">
           <h4>Model Name</h4>
-          <input type="text" ng-model="selected.modelName" placeholder="모델명: ex) R-U956VBLB">
+          <input class="text" type="text" ng-model="selected.modelName" placeholder="모델명: ex) R-U956VBLB">
         </div>
 
         <div class="mode">
           <h4>Mode</h4>
-          <input type="text" ng-model="selected.mode" placeholder="On (동작시 전력 소모)">
+          <input class="text" type="text" ng-model="selected.mode" placeholder="On (동작시 전력 소모)">
         </div>
 
         <div class="name" ng-if="selected.code === 'A5'">
           <h4>Appliance Name</h4>
-          <input type="text" ng-model="selected.name" placeholder="ex) 헤어드라이기, TV..">
+          <input class="text" type="text" ng-model="selected.name" placeholder="ex) 헤어드라이기, TV..">
         </div>
 
         <div class="start-button" ng-click="goToScanSetting()">
