@@ -3,7 +3,9 @@
   height: 60px;
   line-height: 60px;
   background-color: #129fdd;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
 
   back-button {
     position: absolute;
