@@ -17,7 +17,7 @@
 
       <h3 ng-bind-html="'&quot;' + appliance.name + ' - ' + appliance.mode + '&quot;'"></h3>
 
-      <div class="record-option">
+      <div class="record-option" ng-if="!scanner.isScanning && !scanner.isScanned">
         <div class="option-wrapper">
           <div class="option" ng-repeat="option in recordOptions"
                ng-class="{checked: selected.option === option}" ng-click="selected.option = option">
@@ -30,7 +30,28 @@
 
       </div>
 
-      <button></button>
+      <button class="record-button start" ng-if="!scanner.isScanning && !scanner.isScanned" ng-click="scanner.start()"></button>
+
+      <div class="recording" ng-if="scanner.isScanning && !scanner.isScanned">
+        <div class="record-timer">
+          <span class="icon"></span> {{(scanner.recordingTime | date: 'HH:mm:ss': 'UTC') || '00:00:00'}}
+        </div>
+        <button class="record-button stop"  ng-click="scanner.stop()"></button>
+      </div>
+
+      <div class="record-result" ng-if="scanner.isScanned">
+
+        <h4 ng-bind="appliance.model"></h4>
+        <p ng-bind="'스캔 날짜: ' + (scanner.startTime | date: 'yyyy-MM-dd hh:mm')"></p>
+        <p ng-bind="(scanner.recordingTime | date: 'HH시간 mm분 ss초': 'UTC') + ' 동안 측정'"></p>
+        <p ng-bind="'총 사용량 176Wh'"></p>
+
+        <div class="buttons">
+          <button class="scan-button cancel" ng-click="scanner.cancel()">Cancel</button>
+          <button class="scan-button save" ng-click="scanner.save()">Save</button>
+        </div>
+
+      </div>
 
     </div>
 
