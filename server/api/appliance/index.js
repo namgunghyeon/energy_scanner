@@ -5,6 +5,6 @@ var controller = require('./appliance.controller');
 
 var router = express.Router();
 
-router.get('/', controller.getApplianceTypeList);
+router.get('/:email/', controller.getApplianceTypeList);
 
 module.exports = router;
