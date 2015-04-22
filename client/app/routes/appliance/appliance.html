@@ -12,12 +12,12 @@
 
   <section>
 
-    <div class="appliance-frame" ng-repeat="appl in appliances" ng-show="appl.code === selected.code || !showSetting"
+    <div class="appliance-frame" ng-repeat="appl in appliances" ng-show="appl.id === selected.id || !showSetting"
       ng-class="{setting: showSetting}">
 
       <div class="appliance" ng-click="setAppliance(appl)">
         <img ng-src="{{applianceIcon[appl.code]}}">
-        <p ng-bind="appl.name"></p>
+        <p ng-bind="appl.desc || appl.name"></p>
       </div>
 
       <div class="appliance-setting" ng-if="showSetting">
@@ -32,9 +32,9 @@
           <input class="text" type="text" ng-model="selected.mode" placeholder="On (동작시 전력 소모)">
         </div>
 
-        <div class="name" ng-if="selected.code === 'A5'">
+        <div class="name" ng-if="selected.code === 'A5' && !selected.desc">
           <h4>Appliance Name</h4>
-          <input class="text" type="text" ng-model="selected.name" placeholder="ex) 헤어드라이기, TV..">
+          <input class="text" type="text" ng-model="selected.name" placeholder="ex) 헤어드라이기, TV.." ng-init="selected.name = (selected.desc || selected.name)">
         </div>
 
         <div class="start-button" ng-click="goToScanSetting()">

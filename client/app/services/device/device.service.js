@@ -28,10 +28,7 @@ angular.module('energyScannerApp')
           headers: {
             'Content-Type': 'application/json'
           },
-          data: {
-            serial: device.serial,
-            hash: device.hash
-          }
+          data: device
         });
       }
     };

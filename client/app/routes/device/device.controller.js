@@ -22,7 +22,6 @@ angular.module('energyScannerApp')
           Device.setDevice(newDevice).success(function (response) {
 
             if (response === 200 || response === '200') {
-              //$scope.devices.push(newDevice);
               $scope.init();
             } else {
               throw Error('Set device failed');
@@ -52,6 +51,9 @@ angular.module('energyScannerApp')
 
     $scope.init = function () {
 
+      $scope.newDevice = {};
+      $scope.showRegisterForm = false;
+
       Device.getDevices().success(function (devices) {
 
         $scope.devices = [];
@@ -60,7 +62,7 @@ angular.module('energyScannerApp')
           $scope.devices.push({
             serial: device.serial,
             hash: device.device_hash,
-            label: device.label || 'iMAC'
+            label: device.label
           });
         });
 
