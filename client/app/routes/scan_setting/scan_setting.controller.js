@@ -1,14 +1,12 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('ScanSettingCtrl', function ($scope, appliance, $log) {
+  .controller('ScanSettingCtrl', function ($scope, appliance, Scanner, $log) {
 
     $scope.back = {
       stateName: 'appliance',
       label: 'Appliance List'
     };
-
-    $scope.appliance = appliance;
 
     $scope.recordOptions = [
       {
@@ -27,6 +25,9 @@ angular.module('energyScannerApp')
       $scope.selected = {
         option: $scope.recordOptions[0]
       };
+
+      $scope.appliance = appliance;
+      $scope.scanner = Scanner;
 
     };
 

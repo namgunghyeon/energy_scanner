@@ -22,7 +22,8 @@ angular.module('energyScannerApp')
           Device.setDevice(newDevice).success(function (response) {
 
             if (response === 200 || response === '200') {
-              $scope.devices.push(newDevice);
+              //$scope.devices.push(newDevice);
+              $scope.init();
             } else {
               throw Error('Set device failed');
             }
