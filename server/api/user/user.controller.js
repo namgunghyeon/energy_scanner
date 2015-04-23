@@ -8,7 +8,7 @@ var connection = mysql.createConnection(env.MYSQL);
 function insertQueryUserAppliance(queryInfos) {
    var sql = 'INSERT IGNORE INTO user_appliance(user_email, model, user_appliace_type_id)'+
         ' VALUES(\''+ queryInfos.email +'\',\''+ queryInfos.model +'\',\''+ queryInfos.id +'\')';
-        
+
     return sql;
 }
 
@@ -58,7 +58,7 @@ function insertQueryDevice(queryInfos) {
     var sql = 'INSERT INTO user_device(user_email, serial, device_hash, label)' +
         ' VALUES(\''+ queryInfos.email +'\',\''+ queryInfos.serial +'\',\''+ queryInfos.deviceHash +'\',\''+ queryInfos.label +'\')' +
         ' ON DUPLICATE KEY UPDATE user_email= \'' + queryInfos.email + '\',' +
-        ' serial =  \'' + queryInfos.serial + '\',' + 
+        ' serial =  \'' + queryInfos.serial + '\',' +
         ' device_hash =  \'' + queryInfos.deviceHash + '\',' +
         ' label =  \'' + queryInfos.label + '\'';
 
@@ -66,8 +66,8 @@ function insertQueryDevice(queryInfos) {
 }
 
 function selectQueryDevice(queryInfos) {
-    var sql = 'SELECT serial, device_hash FROM user_device' +
-        ' WHERE user_email =   \'' + email + ' \'';
+    var sql = 'SELECT serial, device_hash, label FROM user_device' +
+        ' WHERE user_email =   \'' + queryInfos.email + ' \'';
 
     return sql;
 }
@@ -75,7 +75,7 @@ function selectQueryDevice(queryInfos) {
 function insertQueryUserApplianceType(queryInfos) {
      var sql = 'INSERT INTO user_appliance_type(appliance_code, user_email, `desc`)' +
             ' VALUES(\''+ queryInfos.appCode +'\',\''+ queryInfos.email +'\',\''+ queryInfos.desc +'\')';
-    
+
         return sql;
 }
 
@@ -239,7 +239,7 @@ exports.insertNewApplianceType = function(req, res){
             queryInfos.id = result.insertId;
             res.json(queryInfos);
         } else {
-            res.json('not insert');   
+            res.json('not insert');
         }
     });
 };
@@ -254,8 +254,8 @@ exports.selectDeviceInfo = function(req, res) {
 
     var queryInfos = {
             email : email
-        }, 
-        sql = selectQueryDevice(sql);
+        },
+        sql = selectQueryDevice(queryInfos);
 
       connection.query(sql, function (err, results) {
 
@@ -276,7 +276,7 @@ exports.selectScanHistory = function(req, res) {
 
     var queryInfos = {
             email : email
-        }, 
+        },
         sql = selectQueryScanHistory(queryInfos);
 
       connection.query(sql, function (err, results) {
@@ -311,7 +311,7 @@ function insertUserAppliance(queryInfos, callback){
         }
 
         if (results.length > 0) {
-            
+
             sql = insertQueryUserAppliance(queryInfos);
             connection.query(sql, function (err, result) {
 
@@ -325,7 +325,7 @@ function insertUserAppliance(queryInfos, callback){
                         id : result.insertId,
                         email : queryInfos.email,
                         model : queryInfos.model
-                    } 
+                    }
                     callback(null, [insertData]);
 
                 } else {
@@ -469,9 +469,9 @@ exports.getApplianceTypeList = function(req, res) {
     }
 
     var queryInfos = {
-            email : email,
+            email : email
         },
-    sql = selectQueryUserApplianceTypeByEmail(queryInfos);
+      sql = selectQueryUserApplianceTypeByEmail(queryInfos);
 
     connection.query(sql, function (err, results) {
 

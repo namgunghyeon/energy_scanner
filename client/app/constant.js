@@ -9,12 +9,14 @@ angular.module('energyScannerApp')
       'SIGNIN'     : DOMAIN + '/1.1/users/basicinfo/signin',
       'SIGNUP'     : DOMAIN + '/1.1/users/basicinfo/signup',
       'USER_DEVICES'    : function (email) {
-        return '/api/users/' + email + '/device'
+        return '/api/users/' + email + '/device';
       },
-      'USER_APPLIANCES' : function (email) {
-        return '/api/users/' + email + '/appliance'
+      'USER_APPLIANCE_TYPES' : function (email) {
+        return '/api/users/' + email + '/applianceType';
       },
-      'APPLIANCE_CODE': '/api/appliances/'
+      'SET_DEFAULT_APPLIANCE_TYPES': function (email) {
+        return '/api/users/' + email + '/defaultUserAppliance';
+      }
     };
 
   })());

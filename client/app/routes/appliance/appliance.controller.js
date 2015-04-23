@@ -29,23 +29,62 @@ angular.module('energyScannerApp')
     $scope.init = function () {
 
       // GET Appliance API
-      Appliance.getCode().success(function (response) {
+      Appliance.getApplianceTypes().success(function (response) {
 
-        $scope.appliances = response;
+        if (response.length === 0) {
+
+          Appliance.setDefaultApplianceTypes().success(function (response) {
+
+            if (response === 200 || response === '200') {
+              Appliance.getApplianceTypes().success(function (response) {
+                $scope.appliances = response;
+              }).error(function (response) {
+                $log.error('Get appliance types after set default types: ', response);
+              });
+            }
+
+          }).error(function (response) {
+            $log.error('Set default appliance types: ', response);
+          });
+
+        } else {
+          $scope.appliances = response;
+        }
+
         $scope.selected = {};
 
       }).error(function (response) {
-        $log.error('Get appliance code: ', response);
+        $log.error('Get appliance types: ', response);
       });
 
     };
 
     $scope.goToScanSetting = function () {
-      $state.go('scanSetting', {
-        appliance: angular.toJson($scope.selected)
-      }, {
-        location: false
-      });
+
+      if ($scope.selected.code === 'A5' && !$scope.selected.desc) {
+        Appliance.addApplianceType($scope.selected).success(function (response) {
+          debugger;
+
+          $state.go('scanSetting', {
+            appliance: angular.toJson($scope.selected)
+          }, {
+            location: false
+          });
+
+        }).error(function (response) {
+          $log.error('Add appliance type: ', response);
+        });
+
+      } else {
+
+        $state.go('scanSetting', {
+          appliance: angular.toJson($scope.selected)
+        }, {
+          location: false
+        });
+
+      }
+
     };
 
   });

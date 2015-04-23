@@ -13,8 +13,6 @@ angular.module('energyScannerApp')
       label: 'Home'
     };
 
-    $scope.hasDevices = true;
-
     $scope.init = function () {
 
       Device.getDevices().success(function (devices) {
@@ -37,7 +35,7 @@ angular.module('energyScannerApp')
           });
         }
 
-      }).error(function () {
+      }).error(function (response) {
         $log.error('Get devices: ', response);
       });
 

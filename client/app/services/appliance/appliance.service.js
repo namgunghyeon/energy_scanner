@@ -7,11 +7,11 @@ angular.module('energyScannerApp')
 
     return {
 
-      getCode: function () {
+      setDefaultApplianceTypes: function () {
 
         return $http({
-          method: 'GET',
-          url: API.APPLIANCE_CODE,
+          method: 'POST',
+          url: API.SET_DEFAULT_APPLIANCE_TYPES(userInfo.email),
           headers: {
             'Content-Type': 'application/json'
           }
@@ -19,11 +19,11 @@ angular.module('energyScannerApp')
 
       },
 
-      getAppliances: function () {
+      getApplianceTypes: function () {
 
         return $http({
           method: 'GET',
-          url: API.USER_APPLIANCES(userInfo.email),
+          url: API.USER_APPLIANCE_TYPES(userInfo.email),
           headers: {
             'Content-Type': 'application/json'
           }
@@ -31,19 +31,19 @@ angular.module('energyScannerApp')
 
       },
 
-      setAppliance: function (appliance) {
+      addApplianceType: function (appliance) {
 
         appliance = appliance || {};
 
         return $http({
           method: 'POST',
-          url: API.USER_APPLIANCES(userInfo.email),
+          url: API.USER_APPLIANCE_TYPES(userInfo.email),
           headers: {
             'Content-Type': 'application/json'
           },
           data: {
-            serial: appliance.serial,
-            hash: appliance.hash
+            appCode: appliance.code || 'A5',
+            desc: appliance.name
           }
         });
       }
