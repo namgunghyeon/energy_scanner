@@ -31,9 +31,9 @@ angular.module('energyScannerApp')
 
       },
 
-      addApplianceType: function (appliance) {
+      addApplianceType: function (applianceType) {
 
-        appliance = appliance || {};
+        applianceType = applianceType || {};
 
         return $http({
           method: 'POST',
@@ -42,8 +42,38 @@ angular.module('energyScannerApp')
             'Content-Type': 'application/json'
           },
           data: {
-            appCode: appliance.code || 'A5',
-            desc: appliance.name
+            appCode: applianceType.code || 'A5',
+            desc: applianceType.name
+          }
+        });
+      },
+
+      getAppliances: function () {
+
+        return $http({
+          method: 'GET',
+          url: API.USER_APPLIANCES(userInfo.email),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+      },
+
+      addAppliance: function (appliance) {
+
+        appliance = appliance || {};
+
+        return $http({
+          method: 'POST',
+          url: API.USER_APPLIANCES(userInfo.email),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            id: appliance.id,
+            model: appliance.modelName,
+            desc: appliance.desc
           }
         });
       }

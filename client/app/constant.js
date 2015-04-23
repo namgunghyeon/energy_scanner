@@ -16,6 +16,12 @@ angular.module('energyScannerApp')
       },
       'SET_DEFAULT_APPLIANCE_TYPES': function (email) {
         return '/api/users/' + email + '/defaultUserAppliance';
+      },
+      'USER_APPLIANCES': function (email) {
+        return '/api/users/' + email + '/appliances';
+      },
+      'USER_SCAN_HISTORY': function (email) {
+        return '/api/users/' + email + '/appliances/scan';
       }
     };
 

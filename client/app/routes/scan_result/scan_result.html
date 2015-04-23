@@ -1,3 +1,35 @@
-<div class="col-md-12">
-This is the scan_result view.
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="scan-result-container" ng-init="init()">
+
+  <header>
+    <div class="title">
+      <h2>Scanning Result</h2>
+      <p></p>
+    </div>
+  </header>
+
+  <section>
+
+    <div id="analysis-graph" class="analysis-graph">그래프 영역</div>
+
+    <div class="setting">
+
+    </div>
+    <div class="record-result" ng-if="scanner.isScanned">
+
+      <h4 ng-bind="appliance.model"></h4>
+      <p ng-bind="'스캔 날짜: ' + (scanner.startTime | date: 'yyyy-MM-dd hh:mm')"></p>
+      <p ng-bind="(scanner.recordingTime | date: 'HH시간 mm분 ss초': 'UTC') + ' 동안 측정'"></p>
+      <p ng-bind="'총 사용량 ' + scanner.totalUsage + 'Wh'"></p>
+
+      <div class="buttons">
+        <button class="scan-button cancel" ui-sref="appliance">Cancel</button>
+        <button class="scan-button save" ng-click="scanner.save(appliance)">Save</button>
+      </div>
+
+    </div>
+
+  </section>
+
 </div>

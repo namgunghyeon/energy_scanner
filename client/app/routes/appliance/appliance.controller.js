@@ -61,28 +61,23 @@ angular.module('energyScannerApp')
 
     $scope.goToScanSetting = function () {
 
-      if ($scope.selected.code === 'A5' && !$scope.selected.desc) {
-        Appliance.addApplianceType($scope.selected).success(function (response) {
-          debugger;
-
-          $state.go('scanSetting', {
-            appliance: angular.toJson($scope.selected)
-          }, {
-            location: false
-          });
-
-        }).error(function (response) {
-          $log.error('Add appliance type: ', response);
-        });
-
-      } else {
-
+      function move() {
         $state.go('scanSetting', {
           appliance: angular.toJson($scope.selected)
         }, {
           location: false
         });
+      }
 
+      if ($scope.selected.code === 'A5' && !$scope.selected.desc) {
+        Appliance.addApplianceType($scope.selected).success(function (response) {
+          move();
+        }).error(function (response) {
+          $log.error('Add appliance type: ', response);
+        });
+
+      } else {
+        move();
       }
 
     };
