@@ -116,39 +116,6 @@
         }
       }
 
-      .record-result {
-        text-align: center;
-        margin-top: 10px;
-
-        .buttons {
-          margin-top: 20px;
-
-          .scan-button {
-            width: 40%;
-            padding: 16px;
-            font-size: 14px;
-
-            &.save {
-              color: #fff;
-              background-color: #129fdd;
-
-              &:hover {
-                background-color: #395b77;
-              }
-            }
-
-            &.cancel {
-              margin-right: 5%;
-              border: 1px solid #d4dee5;
-              color: #798ca7;
-
-              &:hover {
-                color: #395B77;
-              }
-            }
-          }
-        }
-      }
     }
   }
 }

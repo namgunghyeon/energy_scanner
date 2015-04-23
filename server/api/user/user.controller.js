@@ -3,7 +3,7 @@
 var _ = require('lodash');
 var env = require('../../config/local.env');
 var mysql = require('mysql');
-var connection = mysql.createConnection(env.MYSQL);
+var connection = mysql.createConnection(_.extend(env.MYSQL));
 
 function insertQueryUserAppliance(queryInfos) {
    var sql = 'INSERT IGNORE INTO user_appliance(user_email, model, user_appliace_type_id)'+
@@ -451,6 +451,7 @@ exports.insertScanHistory = function(req, res) {
         };
 
     var sql = insertQueryScanHistory(queryInfos);
+
     connection.query(sql, function (err, results) {
         if (err) {
           res.json(err);

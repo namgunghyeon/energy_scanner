@@ -30,29 +30,14 @@
 
       </div>
 
-      <button class="record-button start" ng-if="!scanner.isScanning && !scanner.isScanned" ng-click="scanner.start()"></button>
+      <button class="record-button start" ng-if="!scanner.isScanning && !scanner.isScanned" ng-click="scanner.start(selected.option)"></button>
 
       <div class="recording" ng-if="scanner.isScanning && !scanner.isScanned">
         <div class="record-timer">
           <span class="icon"></span> {{(scanner.recordingTime | date: 'HH:mm:ss': 'UTC') || '00:00:00'}}
         </div>
-        <button class="record-button stop"  ng-click="scanner.stop()"></button>
+        <button class="record-button stop"  ng-click="scanComplete()"></button>
       </div>
-
-      <div class="record-result" ng-if="scanner.isScanned">
-
-        <h4 ng-bind="appliance.model"></h4>
-        <p ng-bind="'스캔 날짜: ' + (scanner.startTime | date: 'yyyy-MM-dd hh:mm')"></p>
-        <p ng-bind="(scanner.recordingTime | date: 'HH시간 mm분 ss초': 'UTC') + ' 동안 측정'"></p>
-        <p ng-bind="'총 사용량 176Wh'"></p>
-
-        <div class="buttons">
-          <button class="scan-button cancel" ng-click="scanner.cancel()">Cancel</button>
-          <button class="scan-button save" ng-click="scanner.save()">Save</button>
-        </div>
-
-      </div>
-
     </div>
 
   </section>
