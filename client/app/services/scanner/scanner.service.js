@@ -4,13 +4,6 @@ angular.module('energyScannerApp')
   .factory('Scanner', function (Appliance, ScanHistory, $timeout, $interval, $q, $log) {
 
     return {
-      //isScanning: false,
-      //isScanned: false,
-      //startTime: null,
-      //endTime: null,
-      //recordingTime: 0,
-      //duration: null,
-      //totalUsage: 154,
 
       init: function () {
         this.isScanning = false;
@@ -56,20 +49,29 @@ angular.module('energyScannerApp')
       save: function (appliance) {
 
         var scanHistory = {
-          id: appliance.id,
           start: this.startTime,
           end: this.endTime,
           mode1: appliance.mode,
           totalUsage: this.totalUsage
         };
 
-        $q.all([
-          Appliance.addAppliance(appliance)//,
-          //ScanHistory.saveScanHistory(scanHistory)
-        ]).then(function (responses) {
+        Appliance.addAppliance(appliance).success(function (response) {
+
+          scanHistory.id = response.id;
           $log.info('Appliance added successfully!');
-        }).catch(function (response) {
-          $log.error('Add appliance & save scan history: ', response);
+
+          ScanHistory.saveScanHistory(scanHistory).success(function (response) {
+
+            if (response === '200' || response === 200) {
+              $log.info('Save scan history successfully!');
+            }
+
+          }).error(function (response) {
+            $log.error('Save scan history: ', response);
+          });
+
+        }).error(function (response) {
+          $log.error('Add appliance: ', response);
         });
 
       }
