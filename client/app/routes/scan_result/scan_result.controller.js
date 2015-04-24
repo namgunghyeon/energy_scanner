@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('ScanResultCtrl', function ($scope, appliance, Scanner, $log) {
+  .controller('ScanResultCtrl', function ($scope, appliance, Scanner, $state, $log) {
 
     $scope.back = {
       stateName: 'appliance',
@@ -11,6 +11,13 @@ angular.module('energyScannerApp')
     $scope.init = function () {
       $scope.appliance = appliance;
       $scope.scanner = Scanner;
+
+      $scope.saveScanHistory = function (appliance) {
+
+        $scope.scanner.save(appliance);
+        $state.go('main');
+
+      };
     };
 
   });

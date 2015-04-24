@@ -381,11 +381,11 @@ exports.insertUserAppliance = function(req, res) {
 
         } else {
             console.log(result);
-            res.json([{
+            res.json({
                 id : result[0].id,
                 email : result[0].user_email,
                 model : result[0].model
-            }]);
+            });
         }
     });
 };
