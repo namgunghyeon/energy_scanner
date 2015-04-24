@@ -13,6 +13,7 @@ angular.module('energyScannerApp')
       'DEVICES'    : function (email) {
         return '/api/devices/' + email;
       },
+      'DEVICE_REALTIME': '/api/devices/realtime',
       'APPLIANCE_TYPES' : function (email) {
         return '/api/appliances/' + email + '/applianceType';
       },

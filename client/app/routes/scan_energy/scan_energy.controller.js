@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('ScanEnergyCtrl', function ($scope, applianceId, Device, User, $state, $log) {
+  .controller('ScanEnergyCtrl', function ($scope, applianceId, Device, User, $interval, $state, $log) {
 
     if (!User.isLoggedIn()) {
       $state.go('intro');
@@ -29,11 +29,26 @@ angular.module('energyScannerApp')
 
         $scope.hasDevices = !!$scope.devices.length;
 
-        if (!User.getInfo().device_hash) {
+        if ($scope.hasDevices) {
+
           User.setInfo({
-            device_hash: ($scope.devices[0] && $scope.devices[0].hash) || ''
+            device_hash: $scope.devices[0].hash
           });
+
+          $scope.render = $interval(function () {
+
+            Device.getRealtimeUsage().success(function (response) {
+
+              $log.info('realtime at ' + new Date(), response);
+
+            }).error(function (response) {
+              $log.error('Get realtime usage: ', response);
+            });
+
+          }, 2000, 5);
+
         }
+
 
       }).error(function (response) {
         $log.error('Get devices: ', response);
