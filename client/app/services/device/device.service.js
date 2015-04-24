@@ -11,7 +11,7 @@ angular.module('energyScannerApp')
 
         return $http({
           method: 'GET',
-          url: API.USER_DEVICES(userInfo.email),
+          url: API.DEVICES(userInfo.email),
           headers: {
             'Content-Type': 'application/json'
           }
@@ -24,7 +24,7 @@ angular.module('energyScannerApp')
 
         return $http({
           method: 'POST',
-          url: API.USER_DEVICES(userInfo.email),
+          url: API.DEVICES(userInfo.email),
           headers: {
             'Content-Type': 'application/json'
           },

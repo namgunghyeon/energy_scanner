@@ -5,6 +5,11 @@ var controller = require('./appliance.controller');
 
 var router = express.Router();
 
-router.get('/:email/', controller.getApplianceTypeList);
+router.post('/:email', controller.insertUserAppliance);
+router.get('/:email', controller.selectUserAppliance);
+
+router.post('/:email/defaultUserAppliance', controller.defaultUserApplianceType);
+router.post('/:email/applianceType', controller.insertNewApplianceType);
+router.get('/:email/applianceType', controller.getApplianceTypeList);
 
 module.exports = router;

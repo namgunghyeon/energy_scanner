@@ -11,7 +11,7 @@ angular.module('energyScannerApp')
 
         return $http({
           method: 'POST',
-          url: API.SET_DEFAULT_APPLIANCE_TYPES(userInfo.email),
+          url: API.DEFAULT_APPLIANCE_TYPES(userInfo.email),
           headers: {
             'Content-Type': 'application/json'
           }
@@ -23,7 +23,7 @@ angular.module('energyScannerApp')
 
         return $http({
           method: 'GET',
-          url: API.USER_APPLIANCE_TYPES(userInfo.email),
+          url: API.APPLIANCE_TYPES(userInfo.email),
           headers: {
             'Content-Type': 'application/json'
           }
@@ -37,7 +37,7 @@ angular.module('energyScannerApp')
 
         return $http({
           method: 'POST',
-          url: API.USER_APPLIANCE_TYPES(userInfo.email),
+          url: API.APPLIANCE_TYPES(userInfo.email),
           headers: {
             'Content-Type': 'application/json'
           },
@@ -52,7 +52,7 @@ angular.module('energyScannerApp')
 
         return $http({
           method: 'GET',
-          url: API.USER_APPLIANCES(userInfo.email),
+          url: API.APPLIANCES(userInfo.email),
           headers: {
             'Content-Type': 'application/json'
           }
@@ -66,7 +66,7 @@ angular.module('energyScannerApp')
 
         return $http({
           method: 'POST',
-          url: API.USER_APPLIANCES(userInfo.email),
+          url: API.APPLIANCES(userInfo.email),
           headers: {
             'Content-Type': 'application/json'
           },

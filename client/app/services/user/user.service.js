@@ -9,7 +9,6 @@ angular.module('energyScannerApp')
       this.site_hash = '';
       this.site_id = '';
       this.device_hash = '';
-      this.encodedApiKey = 'YTU1ZGVjMDJkMTM2NDRmYmJjNTc0MmE2MTg1Nzc4YzQ=';
     }
 
     var _userInfo = new Info();
@@ -32,15 +31,9 @@ angular.module('energyScannerApp')
 
       signIn: function (credential) {
 
-        credential.app_version = 'web';
-
         return $http({
           method: 'POST',
           url: API.SIGNIN,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Basic ' + _userInfo.encodedApiKey
-          },
           data: credential
         });
 
