@@ -60,12 +60,10 @@ html, body {
 
 // Component styles are injected through grunt
 // injector
-@import 'directives/analysis-chart/analysis-chart.scss';
 @import 'directives/analysis_chart/analysis_chart.scss';
 @import 'directives/appliance_record/appliance_record.scss';
 @import 'directives/back_button/back_button.scss';
 @import 'directives/my_appliance/my_appliance.scss';
-@import 'directives/realtime-chart/realtime-chart.scss';
 @import 'directives/realtime_chart/realtime_chart.scss';
 @import 'directives/setting_button/setting_button.scss';
 @import 'directives/sign_in/sign_in.scss';
