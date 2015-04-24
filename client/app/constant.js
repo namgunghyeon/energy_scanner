@@ -6,22 +6,24 @@ angular.module('energyScannerApp')
     var DOMAIN = 'http://api.ongetit.com';
 
     return {
-      'SIGNIN'     : DOMAIN + '/1.1/users/basicinfo/signin',
-      'SIGNUP'     : DOMAIN + '/1.1/users/basicinfo/signup',
-      'USER_DEVICES'    : function (email) {
-        return '/api/users/' + email + '/device';
+      //'SIGNIN'     : DOMAIN + '/1.1/users/basicinfo/signin',
+      //'SIGNUP'     : DOMAIN + '/1.1/users/basicinfo/signup',
+      'SIGNIN'     : '/api/users/signin',
+      'SIGNUP'     : '/api/users/signup',
+      'DEVICES'    : function (email) {
+        return '/api/devices/' + email;
       },
-      'USER_APPLIANCE_TYPES' : function (email) {
-        return '/api/users/' + email + '/applianceType';
+      'APPLIANCE_TYPES' : function (email) {
+        return '/api/appliances/' + email + '/applianceType';
       },
-      'SET_DEFAULT_APPLIANCE_TYPES': function (email) {
-        return '/api/users/' + email + '/defaultUserAppliance';
+      'DEFAULT_APPLIANCE_TYPES': function (email) {
+        return '/api/appliances/' + email + '/defaultUserAppliance';
       },
-      'USER_APPLIANCES': function (email) {
-        return '/api/users/' + email + '/appliances';
+      'APPLIANCES': function (email) {
+        return '/api/appliances/' + email;
       },
-      'USER_SCAN_HISTORY': function (email) {
-        return '/api/users/' + email + '/appliances/scan';
+      'SCAN_HISTORY': function (email) {
+        return '/api/scan/' + email + '/history';
       }
     };
 
