@@ -11,7 +11,7 @@ angular.module('energyScannerApp')
 
         return $http({
           method: 'POST',
-          url: API.USER_SCAN_HISTORY(userInfo.email),
+          url: API.SCAN_HISTORY(userInfo.email),
           headers: {
             'Content-Type': 'application/json'
           },
