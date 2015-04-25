@@ -5,11 +5,17 @@ var env = require('../../config/local.env');
 var mysql = require('mysql');
 var connection = mysql.createConnection(env.MYSQL);
 
+function insertQueryUserAppliance(queryInfos) {
+  var sql = 'INSERT IGNORE INTO user_appliance(user_email, model, user_appliance_type_id, mode1, mode2)'+
+    ' VALUES(\''+ queryInfos.email +'\',\''+ queryInfos.model +'\',\''+ queryInfos.id +'\',\''+ queryInfos.mode1 +'\',\''+ queryInfos.mode2 +'\')';
+    return sql;
+}
+
 function selectQueryUserAppliance(queryInfos) {
   var sql = 'SELECT * '+
     ' FROM user_appliance' +
     ' WHERE model = \'' + queryInfos.model + '\'' +
-    '   AND user_appliace_type_id =\'' + queryInfos.id + '\'' +
+    '   AND user_appliance_type_id =\'' + queryInfos.id + '\'' +
     '   AND user_email = \'' + queryInfos.email + '\'';
 
   return sql;
@@ -31,6 +37,7 @@ function alreadyExistsUserAppliance(queryInfos, callback){
 function insertUserAppliance(queryInfos, callback){
 
   var sql = selectQueryUserApplianceType(queryInfos);
+  console.log(sql);
   connection.query(sql, function (err, results) {
 
     if (err) {
@@ -51,7 +58,9 @@ function insertUserAppliance(queryInfos, callback){
           var insertData = {
             id : result.insertId,
             email : queryInfos.email,
-            model : queryInfos.model
+            model : queryInfos.model,
+            mode1 : queryInfos.mode1,
+            mode2 : queryInfos.mode2
           };
 
           callback(null, [insertData]);
@@ -62,14 +71,14 @@ function insertUserAppliance(queryInfos, callback){
       });
 
     } else {
-      callback(null, 'user_appliance_id not match');
+      callback('user_appliance_id not match');
     }
   });
 }
 
 function selectQueryUserApplianceByEmail(queryInfos) {
   var sql = 'SELECT A.id, A.user_email, A.model, B.desc, C.name FROM user_appliance AS A' +
-    '  INNER JOIN user_appliance_type AS B ON B.id = A.user_appliace_type_id' +
+    '  INNER JOIN user_appliance_type AS B ON B.id = A.user_appliance_type_id' +
     '  INNER JOIN appliance_code AS C ON C.code = B.appliance_code' +
     ' WHERE A.user_email = \''+ queryInfos.email +'\'';
 
@@ -114,8 +123,14 @@ function defaultUserApplianceType(queryInfos, callback) {
 }
 
 function insertQueryUserApplianceType(queryInfos) {
-  var sql = 'INSERT INTO user_appliance_type(appliance_code, user_email, `desc`)' +
-    ' VALUES(\''+ queryInfos.appCode +'\',\''+ queryInfos.email +'\',\''+ queryInfos.desc +'\')';
+  var sql = 'INSERT INTO user_appliance_type(appliance_code, user_email, `desc`, name)' +
+    ' VALUES(\''+ queryInfos.appCode +'\',\''+ queryInfos.email +'\',\''+ queryInfos.desc +'\',\''+ queryInfos.name +'\')';
+
+  return sql;
+}
+
+function selectQueryUserApplianceType(queryInfos) {
+  var sql = 'SELECT * FROM user_appliance_type WHERE id = \''+ queryInfos.id +'\'';
 
   return sql;
 }
@@ -133,6 +148,8 @@ exports.insertUserAppliance = function(req, res) {
   var model = req.body.model || null,
     id = req.body.id || null,
     email = req.params.email || null,
+    mode1 = req.body.mode1 || null,
+    mode2 = req.body.mode2 || null,
     desc  = req.body.desc || null;
 
   if (model === null ) {
@@ -154,7 +171,9 @@ exports.insertUserAppliance = function(req, res) {
     model : model,
     id  : id,
     email : email,
-    desc : desc
+    desc : desc,
+    mode1 : mode1,
+    mode2 : mode2
   };
 
   alreadyExistsUserAppliance(queryInfos, function(err, result){
@@ -173,7 +192,9 @@ exports.insertUserAppliance = function(req, res) {
       res.json({
         id : result[0].id,
         email : result[0].user_email,
-        model : result[0].model
+        model : result[0].model,
+        mode1 : result[0].mode1,
+        mode2 : result[0].mode2
       });
     }
   });
@@ -225,7 +246,8 @@ exports.defaultUserApplianceType = function (req, res){
 exports.insertNewApplianceType = function(req, res){
   var email = req.params.email || null,
     appCode = req.body.appCode || null,
-    desc = req.body.desc || null;
+    desc = req.body.desc || null,
+    name = req.body.name;
 
   if (email === null ) {
     res.json('not found email');
@@ -242,6 +264,11 @@ exports.insertNewApplianceType = function(req, res){
     return;
   }
 
+  if (name === null) {
+    res.json('not found desc');
+    return;    
+  }
+
   if (appCode != 'A5') {
     res.json('appCode is not etc');
     return;
@@ -250,7 +277,8 @@ exports.insertNewApplianceType = function(req, res){
   var queryInfos = {
       email : email,
       appCode  : appCode,
-      desc : desc
+      desc : desc,
+      name : name
     },
     sql = insertQueryUserApplianceType(queryInfos);
 

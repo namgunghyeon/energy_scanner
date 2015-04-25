@@ -6,9 +6,9 @@ var mysql = require('mysql');
 var connection = mysql.createConnection(_.extend(env.MYSQL));
 
 function insertQueryScanHistory(queryInfos) {
-  var sql = 'INSERT INTO scan_history(user_appliance_id, start, end, mode1, mode2, totalUsage)'+
-    ' VALUES(\''+ queryInfos.id +'\',\''+ queryInfos.start +'\',\''+ queryInfos.end +'\',\''+ queryInfos.mode1 +'\',\''+ queryInfos.mode2 +'\',\''+ queryInfos.totalUsage +'\')';
-
+  var sql = 'INSERT INTO scan_history(user_appliance_id, start, end, totalUsage)'+
+    ' VALUES(\''+ queryInfos.id +'\',\''+ queryInfos.start +'\',\''+ queryInfos.end +'\',\''+ queryInfos.totalUsage +'\')';
+  
   return sql;
 }
 
@@ -17,8 +17,8 @@ function selectQueryScanHistory(queryInfos) {
     ' A.start,' +
     ' A.end,' +
     ' A.totalUsage,' +
-    ' A.mode1,' +
-    ' A.mode2,' +
+    ' B.mode1,' +
+    ' B.mode2,' +
     ' B.model,' +
     ' E.name ' +
     ' FROM scan_history AS A' +
@@ -58,8 +58,6 @@ exports.selectScanHistory = function(req, res) {
 exports.insertScanHistory = function(req, res) {
   var start = req.body.start || null,
     end = req.body.end || null,
-    mode1 = req.body.mode1 || 'NULL',
-    mode2 = req.body.mode2 || 'NULL',
     totalUsage = req.body.totalUsage || null,
     id = req.body.id || null;
 
@@ -87,9 +85,7 @@ exports.insertScanHistory = function(req, res) {
     start : start,
     end : end,
     totalUsage : totalUsage,
-    id : id,
-    mode1 : mode1,
-    mode2 : mode2
+    id : id
   };
 
   var sql = insertQueryScanHistory(queryInfos);
