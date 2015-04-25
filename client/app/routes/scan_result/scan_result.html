@@ -24,8 +24,8 @@
       <p ng-bind="'총 사용량 ' + scanner.totalUsage + 'Wh'"></p>
 
       <div class="buttons">
-        <button class="scan-button cancel" ui-sref="appliance">Cancel</button>
-        <button class="scan-button save" ng-click="saveScanHistory(appliance)">Save</button>
+        <button class="scan-button cancel" ng-click="backToScanSetting()">Cancel</button>
+        <button class="scan-button save" ng-click="saveScanHistory()">Save</button>
       </div>
 
     </div>

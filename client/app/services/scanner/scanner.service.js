@@ -3,6 +3,16 @@
 angular.module('energyScannerApp')
   .factory('Scanner', function (Appliance, ScanHistory, $timeout, $interval, $q, $log) {
 
+    function getTotalUsage(datastore) {
+      var totalUsage = 0;
+
+      angular.forEach(datastore, function (data) {
+        totalUsage += data.usage;
+      });
+
+      return totalUsage;
+    }
+
     return {
 
       init: function () {
@@ -11,22 +21,13 @@ angular.module('energyScannerApp')
         this.startTime = null;
         this.endTime = null;
         this.recordingTime = 0;
-        this.duration = null;
-        this.totalUsage = 154;
+        this.totalUsage = 0;
+        this.datastore = [];
       },
 
-      setTimer: function (minutes) {
-        this.duration = minutes * 60000;
-        $timeout(this.stop.bind(this), this.duration);
-      },
-
-      start: function (option) {
+      start: function () {
         this.isScanning = true;
         this.startTime = Date.now();
-
-        if (option.id === 'timer') {
-          this.setTimer(option.minutes);
-        }
 
         var update = $interval(function () {
 
@@ -47,6 +48,8 @@ angular.module('energyScannerApp')
       },
 
       save: function (appliance) {
+
+        this.totalUsage = getTotalUsage(this.datastore);
 
         var scanHistory = {
           start: this.startTime,
@@ -74,6 +77,10 @@ angular.module('energyScannerApp')
           $log.error('Add appliance: ', response);
         });
 
+      },
+
+      store: function (data) {
+        this.datastore.push(data);
       }
     };
   });

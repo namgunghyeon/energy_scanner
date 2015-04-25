@@ -12,7 +12,15 @@ angular.module('energyScannerApp')
       $scope.appliance = appliance;
       $scope.scanner = Scanner;
 
-      $scope.saveScanHistory = function (appliance) {
+      $scope.backToScanSetting = function () {
+        $state.go('scanSetting', {
+          appliance: angular.toJson(appliance)
+        }, {
+          location: false
+        });
+      };
+
+      $scope.saveScanHistory = function () {
 
         $scope.scanner.save(appliance);
         $state.go('main');

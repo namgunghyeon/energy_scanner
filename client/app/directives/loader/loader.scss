@@ -1,0 +1,19 @@
+.loading-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  .loading-icon {
+    display: inline-block;
+    width: 40px;
+    height: 65px;
+    background: url("../assets/images/loader.gif") no-repeat center;
+    background-size: 100% 100%;
+
+    @media (-webkit-min-device-pixel-ratio: 2) {
+      background-image: url("../assets/images/loader@2x.gif");
+    }
+
+  }
+}

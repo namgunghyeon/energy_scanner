@@ -11,7 +11,10 @@
 
   <section>
 
-    <div id="realtime-graph" class="realtime-graph">그래프 영역</div>
+    <div class="realtime-graph">
+      <div class="blur-layer" ng-if="!chart.isActive"></div>
+      <realtime-chart is-active="chart.isActive" mode="chart.mode"></realtime-chart>
+    </div>
 
     <div class="setting">
 
@@ -30,7 +33,7 @@
 
       </div>
 
-      <button class="record-button start" ng-if="!scanner.isScanning && !scanner.isScanned" ng-click="scanner.start(selected.option)"></button>
+      <button class="record-button start" ng-if="!scanner.isScanning && !scanner.isScanned" ng-click="scanStart(selected.option)"></button>
 
       <div class="recording" ng-if="scanner.isScanning && !scanner.isScanned">
         <div class="record-timer">

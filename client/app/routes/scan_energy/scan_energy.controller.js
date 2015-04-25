@@ -29,25 +29,11 @@ angular.module('energyScannerApp')
 
         $scope.hasDevices = !!$scope.devices.length;
 
-        if ($scope.hasDevices) {
+        User.setInfo({
+          device_hash: ($scope.devices[0] && $scope.devices[0].hash) || ''
+        });
 
-          User.setInfo({
-            device_hash: $scope.devices[0].hash
-          });
-
-          $scope.render = $interval(function () {
-
-            Device.getRealtimeUsage().success(function (response) {
-
-              $log.info('realtime at ' + new Date(), response);
-
-            }).error(function (response) {
-              $log.error('Get realtime usage: ', response);
-            });
-
-          }, 2000, 5);
-
-        }
+        $scope.isActive = true;
 
 
       }).error(function (response) {

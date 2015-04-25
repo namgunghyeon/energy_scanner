@@ -72,6 +72,9 @@
       <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/highcharts/highcharts.js"></script>
+      <script src="bower_components/highcharts/highcharts-more.js"></script>
+      <script src="bower_components/highcharts/modules/exporting.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
@@ -82,6 +85,7 @@
           <script src="app/directives/analysis_chart/analysis_chart.directive.js"></script>
           <script src="app/directives/appliance_record/appliance_record.directive.js"></script>
           <script src="app/directives/back_button/back_button.directive.js"></script>
+          <script src="app/directives/loader/loader.directive.js"></script>
           <script src="app/directives/my_appliance/my_appliance.directive.js"></script>
           <script src="app/directives/realtime_chart/realtime_chart.directive.js"></script>
           <script src="app/directives/setting_button/setting_button.directive.js"></script>
@@ -114,5 +118,13 @@
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
+
+  <script>
+    Highcharts.setOptions({
+      global: {
+        useUTC: false
+      }
+    });
+  </script>
 </body>
 </html>

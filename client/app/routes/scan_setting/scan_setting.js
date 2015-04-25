@@ -9,7 +9,7 @@ angular.module('energyScannerApp')
         controller: 'ScanSettingCtrl',
         resolve: {
           appliance: ['$stateParams', function ($stateParams) {
-            return angular.fromJson($stateParams.appliance);
+            return $stateParams.appliance && angular.fromJson($stateParams.appliance);
           }]
         }
       });

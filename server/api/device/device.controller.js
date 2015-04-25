@@ -89,7 +89,8 @@ exports.insertDeviceInfo = function(req, res) {
 
 exports.getRealtimeUsage = function (req, res) {
 
-  var endpoint = env.API.DOMAIN + '/1.1/devices/' + req.query.deviceHash + '/realtimeInfo',
+  var deviceHash = req.query.deviceHash || env.DEMO_DEVICE_HASH,
+    endpoint = env.API.DOMAIN + '/1.1/devices/' + deviceHash + '/realtimeInfo',
     encodedApiKey = env.API.KEY;
 
   request({
