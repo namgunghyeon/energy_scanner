@@ -4,6 +4,7 @@ var _ = require('lodash');
 var env = require('../../config/local.env');
 var mysql = require('mysql');
 var connection = mysql.createConnection(_.extend(env.MYSQL));
+var request = require('request');
 
 function selectQueryDevice(queryInfos) {
   var sql = 'SELECT serial, device_hash, label FROM user_device' +
@@ -84,4 +85,32 @@ exports.insertDeviceInfo = function(req, res) {
     res.json('200');
 
     });
+};
+
+exports.getRealtimeUsage = function (req, res) {
+
+  var deviceHash = req.query.deviceHash || env.DEMO_DEVICE_HASH,
+    endpoint = env.API.DOMAIN + '/1.1/devices/' + deviceHash + '/realtimeInfo',
+    encodedApiKey = env.API.KEY;
+
+  request({
+    method: 'GET',
+    url: endpoint,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + encodedApiKey
+    },
+    json: true
+  }, function (err, response, body) {
+
+    var statusCode = response.statusCode;
+
+    if (err) {
+      res.status(statusCode).send(err);
+    } else {
+      res.status(statusCode).send(body);
+    }
+
+  });
+
 };

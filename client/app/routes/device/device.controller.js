@@ -72,10 +72,6 @@ angular.module('energyScannerApp')
           device: $scope.devices[0] || {}
         };
 
-        User.setInfo({
-          device_hash: $scope.selected.device.hash
-        });
-
       }).error(function (response) {
         $log.error('Get devices: ', response);
       });

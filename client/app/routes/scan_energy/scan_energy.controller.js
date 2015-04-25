@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('ScanEnergyCtrl', function ($scope, applianceId, Device, User, $state, $log) {
+  .controller('ScanEnergyCtrl', function ($scope, applianceId, Device, User, $interval, $state, $log) {
 
     if (!User.isLoggedIn()) {
       $state.go('intro');
@@ -29,11 +29,12 @@ angular.module('energyScannerApp')
 
         $scope.hasDevices = !!$scope.devices.length;
 
-        if (!User.getInfo().device_hash) {
-          User.setInfo({
-            device_hash: ($scope.devices[0] && $scope.devices[0].hash) || ''
-          });
-        }
+        User.setInfo({
+          device_hash: ($scope.devices[0] && $scope.devices[0].hash) || ''
+        });
+
+        $scope.isActive = true;
+
 
       }).error(function (response) {
         $log.error('Get devices: ', response);
