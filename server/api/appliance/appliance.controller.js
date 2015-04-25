@@ -7,7 +7,6 @@ var connection = mysql.createConnection(env.MYSQL);
 
 // Get list of appliances
 
-
 function selectQueryUserApplianceTypeByEmail(queryInfos) {
     var sql = 'SELECT A.id, B.code, A.desc, B.name FROM user_appliance_type AS A INNER JOIN appliance_code AS B' +
             '  ON A.appliance_code = B.code' +
@@ -15,7 +14,6 @@ function selectQueryUserApplianceTypeByEmail(queryInfos) {
 
     return sql;
 }
-
 
 exports.getApplianceTypeList = function(req, res) {
     var email = req.params.email || null;

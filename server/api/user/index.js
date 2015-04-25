@@ -18,6 +18,4 @@ router.get('/:email/applianceType', controller.getApplianceTypeList);
 router.get('/:email/appliances/scan', controller.selectScanHistory); 
 router.post('/:email/appliances/scan', controller.insertScanHistory);
 
-
-
 module.exports = router;
