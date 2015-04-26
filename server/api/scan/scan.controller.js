@@ -117,7 +117,7 @@ exports.selectScanRawData = function(req, res) {
   var email = req.params.email || null,
     scanId = req.query.scanId || null,
     filePath = path.join(config.root, 'server/data/');
-  console.log('select raw data scanId: ', scanId);
+
   if (email === null ) {
     res.send('not found email');
     return;
