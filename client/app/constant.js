@@ -21,6 +21,9 @@ angular.module('energyScannerApp')
       },
       'SCAN_HISTORY': function (email) {
         return '/api/scan/' + email + '/history';
+      },
+      'SCAN_RAW_DATA': function (email) {
+        return '/api/scan/' + email + '/rawData';
       }
     };
 

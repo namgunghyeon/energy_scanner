@@ -8,7 +8,7 @@ var connection = mysql.createConnection(_.extend(env.MYSQL));
 function insertQueryScanHistory(queryInfos) {
   var sql = 'INSERT INTO scan_history(user_appliance_id, start, end, totalUsage)'+
     ' VALUES(\''+ queryInfos.id +'\',\''+ queryInfos.start +'\',\''+ queryInfos.end +'\',\''+ queryInfos.totalUsage +'\')';
-  
+
   return sql;
 }
 

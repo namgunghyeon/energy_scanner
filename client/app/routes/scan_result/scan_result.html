@@ -21,7 +21,7 @@
       <h4 ng-bind="appliance.model"></h4>
       <p ng-bind="'스캔 날짜: ' + (scanner.startTime | date: 'yyyy-MM-dd hh:mm')"></p>
       <p ng-bind="(scanner.recordingTime | date: 'HH시간 mm분 ss초': 'UTC') + ' 동안 측정'"></p>
-      <p ng-bind="'총 사용량 ' + scanner.totalUsage + 'Wh'"></p>
+      <p ng-bind="'총 사용량 ' + scanner.totalUsage + 'mWh'"></p>
 
       <div class="buttons">
         <button class="scan-button cancel" ng-click="backToScanSetting()">Cancel</button>
