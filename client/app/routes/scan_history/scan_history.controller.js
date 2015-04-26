@@ -1,23 +1,23 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('ScanHistoryCtrl', function ($scope) {
+  .controller('ScanHistoryCtrl', function ($scope, ScanHistory, $log) {
 
     $scope.back = {
       stateName: 'main',
       label: 'Home'
     };
 
-    $scope.myAppliances = [
-      {
-        id: 0
-      },
-      {
-        id: 1
-      },
-      {
-        id: 2
-      }
-    ];
+    $scope.init = function () {
+
+      ScanHistory.getScanHistory().success(function (response) {
+
+        $scope.scanList = response;
+
+      }).error(function (response) {
+        $log.error('Get appliances: ', response);
+      });
+
+    };
 
   });

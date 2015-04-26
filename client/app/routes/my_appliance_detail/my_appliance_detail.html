@@ -1,19 +1,20 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="my-appliance-detail-container">
+<div class="my-appliance-detail-container" ng-init="init()">
 
   <header>
-    <h3>Analyze My Appliance<button ng-click="goToScan()">Scan Energy</button></h3>
+    <h3>Analyze My Appliance<button ui-sref="scanEnergy">Scan Energy</button></h3>
   </header>
 
   <section>
 
-    <div id="appliance-detail-chart" class="appliance-detail-chart">차트 영역</div>
+    <div class="appliance-detail-chart">
+      <analysis-chart data="rawData" height="280">
+        데이터가 없습니다.
+      </analysis-chart>
+    </div>
 
     <div class="appliance-detail-record">
-      <div class="appliance-image">
-        <img alt="Appliance image">
-      </div>
       <appliance-record record="record"></appliance-record>
     </div>
 

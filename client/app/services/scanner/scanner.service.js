@@ -7,7 +7,7 @@ angular.module('energyScannerApp')
       var totalUsage = 0;
 
       angular.forEach(datastore, function (data) {
-        totalUsage += data.usage;
+        totalUsage += data.y;
       });
 
       return totalUsage;
@@ -71,8 +71,11 @@ angular.module('energyScannerApp')
 
           ScanHistory.saveScanHistory(history).success(function (response) {
 
-            if (response === '200' || response === 200) {
-              deferred.resolve(makeResponse(200, 'Save appliance & scan history successfully!'));
+            if (response.code === '200' || response.code === 200) {
+              deferred.resolve(makeResponse(200, 'Save appliance & scan history successfully!', {
+                applianceId: history.id,
+                scanId: response.scanId
+              }));
             } else {
               deferred.reject(makeResponse(400, 'Error occurred when save scan history', response));
             }
@@ -88,8 +91,8 @@ angular.module('energyScannerApp')
         return deferred.promise;
       },
 
-      saveRawData: function (appliance) {
-        return ScanHistory.saveScanRawData(appliance.id, this.datastore);
+      saveRawData: function (ids) {
+        return ScanHistory.saveScanRawData(ids, this.datastore);
       },
 
       store: function (data) {

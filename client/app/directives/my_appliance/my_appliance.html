@@ -1,6 +1,8 @@
-<div class="my-appliance-container" title="상세 정보로 이동하기" ng-click="goDetail(applianceId)">
+<div class="my-appliance-container" title="상세 정보로 이동하기" ng-click="goDetail(record.scanId)">
 
-  <div id="scan-graph" class="scan-graph"></div>
+  <div class="scan-graph">
+    <img ng-src="/assets/images/blur_layer.png">
+  </div>
 
   <div class="scan-record">
     <appliance-record record="record"></appliance-record>

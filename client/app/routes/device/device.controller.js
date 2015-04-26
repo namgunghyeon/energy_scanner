@@ -17,7 +17,7 @@ angular.module('energyScannerApp')
 
         if (Object.keys(newDevice).length === 2) {
 
-          newDevice.hash = 'dbe711ffa537b83b135f37fd64c309682985fd53';
+          newDevice.hash = newDevice.hash || 'dbe711ffa537b83b135f37fd64c309682985fd53';  // 테스트용 iMAC
 
           Device.setDevice(newDevice).success(function (response) {
 
