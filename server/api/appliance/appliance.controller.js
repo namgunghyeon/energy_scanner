@@ -180,15 +180,16 @@ exports.insertUserAppliance = function(req, res) {
     if (result.length <= 0) {
 
       insertUserAppliance(queryInfos, function(err, insertData){
+
         if (err){
           res.json(err);
         } else {
-          res.json(insertData)
+          res.json(insertData[0]);
         }
       });
 
     } else {
-      console.log(result);
+
       res.json({
         id : result[0].id,
         email : result[0].user_email,
@@ -266,7 +267,7 @@ exports.insertNewApplianceType = function(req, res){
 
   if (name === null) {
     res.json('not found desc');
-    return;    
+    return;
   }
 
   if (appCode != 'A5') {

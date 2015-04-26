@@ -3,11 +3,11 @@
 angular.module('energyScannerApp')
   .factory('Appliance', function (API, User, $http) {
 
-    var userInfo = User.getInfo();
-
     return {
 
       setDefaultApplianceTypes: function () {
+
+        var userInfo = User.getInfo();
 
         return $http({
           method: 'POST',
@@ -21,6 +21,8 @@ angular.module('energyScannerApp')
 
       getApplianceTypes: function () {
 
+        var userInfo = User.getInfo();
+
         return $http({
           method: 'GET',
           url: API.APPLIANCE_TYPES(userInfo.email),
@@ -32,6 +34,8 @@ angular.module('energyScannerApp')
       },
 
       addApplianceType: function (applianceType) {
+
+        var userInfo = User.getInfo();
 
         applianceType = applianceType || {};
 
@@ -50,6 +54,8 @@ angular.module('energyScannerApp')
 
       getAppliances: function () {
 
+        var userInfo = User.getInfo();
+
         return $http({
           method: 'GET',
           url: API.APPLIANCES(userInfo.email),
@@ -61,6 +67,8 @@ angular.module('energyScannerApp')
       },
 
       addAppliance: function (appliance) {
+
+        var userInfo = User.getInfo();
 
         appliance = appliance || {};
 

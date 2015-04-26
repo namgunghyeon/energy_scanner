@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('MyApplianceDetailCtrl', function ($scope, applianceId, User, $state, $log) {
+  .controller('MyApplianceDetailCtrl', function ($scope, scanId, ScanHistory, User, $state, $q, $log) {
 
     if (!User.isLoggedIn()) {
       $state.go('intro');
@@ -13,24 +13,36 @@ angular.module('energyScannerApp')
       label: 'My Appliances'
     };
 
-    $scope.goToScan = function () {
-      $state.go('scanEnergy', {
-        applianceId: applianceId
-      }, {
-        location: false
-      });
-    };
+    $scope.init = function () {
 
-    $scope.record = {
-      scanId: 0,
-      name: '냉장고',
-      model: 'R-U956VBLB',
-      scannedAt: {
-        start: Date.now() - 300000,
-        end: Date.now()
-      },
-      totalUsage: 176,
-      data: []
+      $q.all([
+        ScanHistory.getScanHistoryOne(scanId),
+        ScanHistory.getScanRawData(scanId)
+      ]).then(function (responses) {
+
+        var historyResponse = responses[0].data[0] || {},
+          rawDataResponse = responses[1].data;
+
+        $scope.record = {
+          scanId: historyResponse.scan_id,
+          name: historyResponse.name,
+          model: historyResponse.model,
+          mode: historyResponse.mode1 || historyResponse.mode2,
+          scannedAt: {
+            start: historyResponse.start,
+            end: historyResponse.end
+          },
+          totalUsage: historyResponse.totalUsage
+        };
+
+        if (rawDataResponse.code === 200) {
+          $scope.rawData = rawDataResponse.detail.data;
+        }
+
+      }).catch(function (response) {
+        $log.error('My appliance detail init: ', response);
+      });
+
     };
 
   });

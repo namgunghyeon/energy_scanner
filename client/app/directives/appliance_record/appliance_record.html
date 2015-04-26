@@ -1,6 +1,7 @@
 <div class="appliance-record-container">
-  <h4 ng-bind="record.name"></h4>
-  <p ng-bind="record.model"></p>
+  <h4 ng-bind="record.name></h4>
+  <p ng-bind="'모델명: ' + record.model"></p>
+  <p ng-bind="'모드: ' + record.mode"></p>
   <p ng-bind="'스캔 날짜: ' + (record.scannedAt.start | date: 'yyyy-MM-dd hh:mm')"></p>
   <p ng-bind="duration | date: durationFormat"></p>
   <p ng-bind="'총 사용량 ' + record.totalUsage + 'Wh'"></p>

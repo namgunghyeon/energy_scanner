@@ -48,8 +48,8 @@ angular.module('energyScannerApp')
 
                       if (scope.mode === 'scan') {
                         Scanner.store({
-                          timestamp: data.timestamp,
-                          usage: data.active_power
+                          x: data.timestamp,
+                          y: data.active_power / 1000
                         });
                       }
 

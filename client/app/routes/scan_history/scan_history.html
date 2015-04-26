@@ -1,13 +1,13 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="scan-history-container">
+<div class="scan-history-container" ng-init="init()">
 
   <header>
     <h3>My Appliances</h3>
   </header>
 
   <section>
-    <my-appliance ng-repeat="appl in myAppliances" appliance-id="{{appl.id}}"></my-appliance>
+    <my-appliance ng-repeat="scanInfo in scanList" info="scanInfo"></my-appliance>
   </section>
 
 

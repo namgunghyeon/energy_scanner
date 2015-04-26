@@ -11,12 +11,7 @@ angular.module('energyScannerApp')
     $scope.init = function () {
       $scope.appliance = appliance;
       $scope.scanner = Scanner;
-
-      //Scanner.saveRawData(appliance).then(function (response) {
-      //
-      //}).catch(function (response) {
-      //
-      //});
+      $scope.rawData = $scope.scanner.datastore;
 
       $scope.backToScanSetting = function () {
 
@@ -37,9 +32,21 @@ angular.module('energyScannerApp')
 
         $scope.scanner.saveHistory(appliance).then(function (response) {
 
-          if (response.code === 200) {
+          if (response.code === 200 || response.code === '200') {
             $window.alert('스캔 데이터가 저장되었습니다.');
-            $state.go('main');
+
+            if (response.detail.applianceId && response.detail.scanId) {
+              $scope.scanner.saveRawData(response.detail).success(function (response) {
+                debugger;
+                $state.go('main');
+              }).error(function (response) {
+                $window.alert('스캔 raw 데이터 저장 중 에러가 발생했습니다!');
+                $log.error('Save scan raw data: ', response);
+              });
+            } else {
+              $state.go('main');
+            }
+
           } else {
             $window.alert('스캔 저장 중 에러가 발생했습니다!');
             $log.error('Save scan history: ', response);
@@ -50,6 +57,21 @@ angular.module('energyScannerApp')
           $log.error('Save scan history: ', response);
         });
 
+      };
+
+      $scope.toProperUnit = function (usage) {
+
+        var properUnit = '';
+
+        if (usage < 1000) {
+          properUnit += usage + ' mW';
+        } else if (usage < 1000000) {
+          properUnit += (usage / 1000).toFixed(2) + ' W';
+        } else {
+          properUnit += (usage / 1000000).toFixed(2) + ' KW';
+        }
+
+        return properUnit;
       };
     };
 
