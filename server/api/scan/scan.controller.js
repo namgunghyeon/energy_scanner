@@ -8,7 +8,7 @@ var connection = mysql.createConnection(_.extend(env.MYSQL));
 function insertQueryScanHistory(queryInfos) {
   var sql = 'INSERT INTO scan_history(user_appliance_id, start, end, totalUsage)'+
     ' VALUES(\''+ queryInfos.id +'\',FROM_UNIXTIME(\''+ queryInfos.start +'\'),FROM_UNIXTIME(\''+ queryInfos.end +'\'),\''+ queryInfos.totalUsage +'\')';
-  
+
   return sql;
 }
 
@@ -89,7 +89,7 @@ exports.insertScanHistory = function(req, res) {
   };
 
   var sql = insertQueryScanHistory(queryInfos);
-  
+
   connection.query(sql, function (err, results) {
     if (err) {
       res.json(err);

@@ -13,6 +13,14 @@ angular.module('energyScannerApp')
       return totalUsage;
     }
 
+    function makeResponse(code, message, detail) {
+      return {
+        code: code,
+        message: message,
+        detail: detail
+      };
+    }
+
     return {
 
       init: function () {
@@ -45,38 +53,43 @@ angular.module('energyScannerApp')
         this.isScanning = false;
         this.isScanned = true;
         this.endTime = Date.now();
+        this.totalUsage = getTotalUsage(this.datastore);
       },
 
-      save: function (appliance) {
+      saveHistory: function (appliance) {
 
-        this.totalUsage = getTotalUsage(this.datastore);
-
-        var scanHistory = {
-          start: this.startTime,
-          end: this.endTime,
-          mode1: appliance.mode,
-          totalUsage: this.totalUsage
-        };
+        var deferred = $q.defer(),
+            history = {
+              start: this.startTime,
+              end: this.endTime,
+              totalUsage: this.totalUsage
+            };
 
         Appliance.addAppliance(appliance).success(function (response) {
 
-          scanHistory.id = response.id;
-          $log.info('Appliance added successfully!');
+          history.id = response.id;
 
-          ScanHistory.saveScanHistory(scanHistory).success(function (response) {
+          ScanHistory.saveScanHistory(history).success(function (response) {
 
             if (response === '200' || response === 200) {
-              $log.info('Save scan history successfully!');
+              deferred.resolve(makeResponse(200, 'Save appliance & scan history successfully!'));
+            } else {
+              deferred.reject(makeResponse(400, 'Error occurred when save scan history', response));
             }
 
           }).error(function (response) {
-            $log.error('Save scan history: ', response);
+            deferred.reject(makeResponse(400, 'Error occurred when save scan history', response));
           });
 
         }).error(function (response) {
-          $log.error('Add appliance: ', response);
+          deferred.reject(makeResponse(400, 'Error occurred when add appliance', response));
         });
 
+        return deferred.promise;
+      },
+
+      saveRawData: function (appliance) {
+        return ScanHistory.saveScanRawData(appliance.id, this.datastore);
       },
 
       store: function (data) {
