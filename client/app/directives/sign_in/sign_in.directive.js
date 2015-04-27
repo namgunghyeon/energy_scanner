@@ -48,7 +48,7 @@ angular.module('energyScannerApp')
 
               User.setInfo(response);
 
-              if (response.code === 200) {
+              if (response.code === 200 || response.code === 204) {
 
                 $cookies.esu = $window.btoa(angular.toJson(credential));
 
