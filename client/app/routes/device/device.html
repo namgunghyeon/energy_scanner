@@ -24,13 +24,13 @@
       <div class="register-form" ng-show="showRegisterForm">
         <h3>New Device</h3>
         <div class="serial">
-          <input type="text" placeholder="Serial Number" ng-model="newDevice.serial">
+          <input type="text" placeholder="Serial Number (Required)" ng-model="newDevice.serial">
         </div>
-        <div class="hash">
-          <input type="text" placeholder="Device hash (Optional)" ng-model="newDevice.hash">
-        </div>
+        <!--<div class="hash">-->
+          <!--<input type="text" placeholder="Device hash (Optional)" ng-model="newDevice.hash">-->
+        <!--</div>-->
         <div class="label">
-          <input type="text" placeholder="Device Label" ng-model="newDevice.label">
+          <input type="text" placeholder="Device Label (Optional)" ng-model="newDevice.label">
         </div>
         <div class="buttons">
           <button class="cancel" ng-click="register.cancel()">Cancel</button>

@@ -15,21 +15,32 @@ angular.module('energyScannerApp')
       },
       confirm: function (newDevice) {
 
-        if (Object.keys(newDevice).length === 2) {
+        if (newDevice.serial) {
 
-          newDevice.hash = newDevice.hash || 'dbe711ffa537b83b135f37fd64c309682985fd53';  // 테스트용 iMAC
+          //newDevice.hash = newDevice.hash || 'dbe711ffa537b83b135f37fd64c309682985fd53';  // 테스트용 iMAC
 
-          Device.setDevice(newDevice).success(function (response) {
+          Device.getHash(newDevice.serial).then(function (response) {
 
-            if (response === 200 || response === '200') {
-              $scope.init();
-            } else {
-              throw Error('Set device failed');
-            }
+            newDevice.hash = response.hash;
 
-          }).error(function (response) {
-            $log.error('Set device: ', response);
+            Device.setDevice(newDevice).success(function (response) {
+
+              if (response === 200 || response === '200') {
+                $scope.init();
+              } else {
+                throw Error('Set device failed');
+              }
+
+            }).error(function (response) {
+              $log.error('Set device: ', response);
+            });
+
+          }).catch(function (response) {
+            $window.alert('디바이스 등록 중 에러가 발생했습니다.');
+            $log.error('Device get hash: ', response);
           });
+
+
         } else {
           $window.alert('등록할 디바이스 정보를 입력해주세요.');
         }
