@@ -18,9 +18,9 @@
     </ul>
 
     <div class="register">
-      <div class="register-button" ng-show="!showRegisterForm" ng-click="addNewDeviceForm()">
+      <a href class="register-button" ng-show="!showRegisterForm" ng-click="addNewDeviceForm()">
         <span class="add-icon"></span> Energy Scanner 추가
-      </div>
+      </a>
       <div class="register-form" ng-show="showRegisterForm">
         <h3>New Device</h3>
         <div class="serial">
@@ -33,6 +33,12 @@
           <button class="cancel" ng-click="register.cancel()">Cancel</button>
           <button class="confirm" ng-click="register.confirm(newDevice)">Confirm</button>
         </div>
+      </div>
+    </div>
+
+    <div class="continue">
+      <div class="continue-button" ng-show="selected.device" ng-click="goToScanEnergy()">
+        <span class="add-icon"></span> 설정 후 계속하기
       </div>
     </div>
 

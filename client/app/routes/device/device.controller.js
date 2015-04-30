@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('DeviceCtrl', function ($scope, Device, User, $window, $log) {
+  .controller('DeviceCtrl', function ($scope, Device, User, $state, $window, $log) {
 
     $scope.back = {
       stateName: 'scanEnergy',
@@ -52,17 +52,30 @@ angular.module('energyScannerApp')
 
     $scope.selectDevice = function (device) {
       $scope.selected.device = device;
+    };
 
-      User.setInfo({
-        device_hash: $scope.selected.device.hash
-      });
+    $scope.goToScanEnergy = function () {
+
+      if ($scope.selected.device) {
+        User.setInfo({
+          device_hash: $scope.selected.device.hash
+        });
+
+        $state.go('scanEnergy');
+
+      } else {
+        $window.alert('디바이스를 선택해주세요!');
+      }
 
     };
 
     $scope.init = function () {
 
+      var selectedDeviceHash = User.getInfo().device_hash;
+
       $scope.newDevice = {};
       $scope.showRegisterForm = false;
+      $scope.selected = {};
 
       Device.getDevices().success(function (devices) {
 
@@ -74,13 +87,16 @@ angular.module('energyScannerApp')
             hash: device.device_hash,
             label: device.label
           });
+
         });
 
         $scope.hasDevices = !!$scope.devices.length;
 
-        $scope.selected = {
-          device: $scope.devices[0] || {}
-        };
+        angular.forEach($scope.devices, function (device) {
+          if (selectedDeviceHash === device.hash) {
+            $scope.selected.device = device;
+          }
+        });
 
       }).error(function (response) {
         $log.error('Get devices: ', response);
