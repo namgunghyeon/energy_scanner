@@ -85,8 +85,7 @@ angular.module('energyScannerApp')
 
       getHash: function (serial) {
 
-        var deferred = $q.defer(),
-          self = this;
+        var deferred = $q.defer();
 
         this.registerNewDevice(serial).success(function (response) {
 
