@@ -52,10 +52,11 @@ angular.module('energyScannerApp')
 
     $scope.selectDevice = function (device) {
       $scope.selected.device = device;
-
+      debugger;
       User.setInfo({
         device_hash: $scope.selected.device.hash
       });
+      $log.info('user info: ', User.getInfo());
     };
 
     $scope.init = function () {

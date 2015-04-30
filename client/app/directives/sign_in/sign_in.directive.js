@@ -46,6 +46,8 @@ angular.module('energyScannerApp')
 
             User.signIn(credential).success(function (response) {
 
+              response.device_hash = '';
+
               User.setInfo(response);
 
               if (response.code === 200 || response.code === 204) {

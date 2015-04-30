@@ -37,7 +37,7 @@ angular.module('energyScannerApp')
       getRealtimeUsage: function () {
 
         var userInfo = User.getInfo();
-
+        debugger;
         return $http({
           method: 'GET',
           url: API.DEVICE_REALTIME,
