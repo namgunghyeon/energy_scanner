@@ -6,30 +6,32 @@ var mysql = require('mysql');
 var connection = mysql.createConnection(env.MYSQL);
 
 function insertQueryUserAppliance(queryInfos) {
-  var sql = 'INSERT IGNORE INTO user_appliance(user_email, model, user_appliance_type_id, mode1, mode2)'+
-    ' VALUES(\''+ queryInfos.email +'\',\''+ queryInfos.model +'\',\''+ queryInfos.id +'\',\''+ queryInfos.mode1 +'\',\''+ queryInfos.mode2 +'\')';
+  var sql = 'INSERT IGNORE INTO user_appliance(user_device_id, model, user_appliance_type_id, mode1, mode2)'+
+    ' VALUES(\''+ queryInfos.userDeviceId +'\',\''+ queryInfos.model +'\',\''+ queryInfos.id +'\',\''+ queryInfos.mode1 +'\',\''+ queryInfos.mode2 +'\')';
     return sql;
 }
 
 function selectQueryUserAppliance(queryInfos) {
   var sql = 'SELECT * '+
-    ' FROM user_appliance' +
-    ' WHERE model = \'' + queryInfos.model + '\'' +
-    '   AND user_appliance_type_id =\'' + queryInfos.id + '\'' +
-    '   AND user_email = \'' + queryInfos.email + '\'';
+    ' FROM user_appliance AS A' +
+    '  INNER JOIN user_device AS B' +
+    '          ON A.user_device_id = B.id' +
+    ' WHERE A.model = \'' + queryInfos.model + '\'' +
+    '   AND A.user_appliance_type_id =\'' + queryInfos.id + '\'' +
+    '   AND B.user_email = \'' + queryInfos.email + '\'';
 
   return sql;
 }
 
 function alreadyExistsUserAppliance(queryInfos, callback){
   var sql = selectQueryUserAppliance(queryInfos);
+  console.log(sql);
   connection.query(sql, function (err, results) {
 
     if (err) {
       callback(err);
     }
 
-    console.log(sql);
     callback(null, results);
   });
 }
@@ -58,9 +60,10 @@ function insertUserAppliance(queryInfos, callback){
           var insertData = {
             id : result.insertId,
             email : queryInfos.email,
+            userDeviceId : queryInfos.userDeviceId,
             model : queryInfos.model,
-            mode1 : queryInfos.mode1,
-            mode2 : queryInfos.mode2
+            mode1 : queryInfos.mode1 || 'null',
+            mode2 : queryInfos.mode2 || 'null'
           };
 
           callback(null, [insertData]);
@@ -77,10 +80,11 @@ function insertUserAppliance(queryInfos, callback){
 }
 
 function selectQueryUserApplianceByEmail(queryInfos) {
-  var sql = 'SELECT A.id, A.user_email, A.model, B.desc, C.name FROM user_appliance AS A' +
+  var sql = 'SELECT A.id, D.id AS userDeviceId, D.user_email, A.model, B.desc, C.name FROM user_appliance AS A' +
     '  INNER JOIN user_appliance_type AS B ON B.id = A.user_appliance_type_id' +
     '  INNER JOIN appliance_code AS C ON C.code = B.appliance_code' +
-    ' WHERE A.user_email = \''+ queryInfos.email +'\'';
+    '  INNER JOIN user_device AS D ON A.user_device_id = D.id' +
+    ' WHERE D.user_email = \''+ queryInfos.email +'\'';
 
   return sql;
 }
@@ -148,6 +152,7 @@ exports.insertUserAppliance = function(req, res) {
   var model = req.body.model || null,
     id = req.body.id || null,
     email = req.params.email || null,
+    userDeviceId = req.body.userDeviceId || null,
     mode1 = req.body.mode1 || null,
     mode2 = req.body.mode2 || null,
     desc  = req.body.desc || null;
@@ -167,13 +172,19 @@ exports.insertUserAppliance = function(req, res) {
     return;
   }
 
+  if (userDeviceId === null) {
+    res.json('not found userDeviceId');
+    return;
+  }
+
   var queryInfos = {
     model : model,
     id  : id,
     email : email,
     desc : desc,
     mode1 : mode1,
-    mode2 : mode2
+    mode2 : mode2,
+    userDeviceId : userDeviceId
   };
 
   alreadyExistsUserAppliance(queryInfos, function(err, result){
@@ -193,6 +204,7 @@ exports.insertUserAppliance = function(req, res) {
       res.json({
         id : result[0].id,
         email : result[0].user_email,
+        userDeviceId : result[0].user_device_id,
         model : result[0].model,
         mode1 : result[0].mode1,
         mode2 : result[0].mode2
