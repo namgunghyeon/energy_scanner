@@ -32,12 +32,13 @@ function selectQueryScanHistory(queryInfos) {
     ' ON D.id = B.user_appliance_type_id' +
     ' INNER JOIN appliance_code AS E' +
     ' ON E.code = D.appliance_code' +
-    ' WHERE B.user_email = \'' + queryInfos.email + '\'';
+    ' INNER JOIN user_device AS F'
+    ' WHERE F.user_email = \'' + queryInfos.email + '\'';
 
   if (queryInfos.scanId) {
     sql += ' AND A.id = ' + queryInfos.scanId;
   }
-
+  console.log(sql);
   return sql;
 }
 
