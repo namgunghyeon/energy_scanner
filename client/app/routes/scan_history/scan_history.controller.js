@@ -11,7 +11,7 @@ angular.module('energyScannerApp')
     $scope.init = function () {
 
       ScanHistory.getScanHistory().success(function (response) {
-
+        debugger;
         $scope.scanList = response;
 
       }).error(function (response) {

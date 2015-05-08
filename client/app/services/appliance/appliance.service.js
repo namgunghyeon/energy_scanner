@@ -82,7 +82,8 @@ angular.module('energyScannerApp')
             id: appliance.id,
             model: appliance.modelName,
             mode1: appliance.mode1,
-            desc: appliance.desc
+            desc: appliance.desc,
+            userDeviceId: appliance.userDeviceId
           }
         });
       }

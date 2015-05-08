@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('ScanResultCtrl', function ($scope, appliance, Scanner, $state, $window, $log) {
+  .controller('ScanResultCtrl', function ($scope, appliance, Scanner, User, $state, $window, $log) {
 
     $scope.back = {
       stateName: 'appliance',
@@ -30,6 +30,9 @@ angular.module('energyScannerApp')
 
       $scope.saveScanHistory = function () {
 
+        var userInfo = User.getInfo();
+        appliance.userDeviceId = userInfo.device_id;
+
         $scope.scanner.saveHistory(appliance).then(function (response) {
 
           if (response.code === 200 || response.code === '200') {
@@ -37,7 +40,7 @@ angular.module('energyScannerApp')
 
             if (response.detail.applianceId && response.detail.scanId) {
               $scope.scanner.saveRawData(response.detail).success(function (response) {
-                debugger;
+
                 $state.go('main');
               }).error(function (response) {
                 $window.alert('스캔 raw 데이터 저장 중 에러가 발생했습니다!');
