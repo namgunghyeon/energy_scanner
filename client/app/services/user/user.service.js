@@ -9,6 +9,7 @@ angular.module('energyScannerApp')
       this.site_hash = '';
       this.site_id = '';
       this.device_hash = '';
+      this.device_id = '';
     }
 
     var _userInfo = new Info();

@@ -58,6 +58,7 @@ angular.module('energyScannerApp')
 
       if ($scope.selected.device) {
         User.setInfo({
+          device_id: $scope.selected.device.id,
           device_hash: $scope.selected.device.hash
         });
 
@@ -83,6 +84,7 @@ angular.module('energyScannerApp')
 
         angular.forEach(devices, function (device) {
           $scope.devices.push({
+            id: device.id,
             serial: device.serial,
             hash: device.device_hash,
             label: device.label

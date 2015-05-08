@@ -21,6 +21,7 @@ angular.module('energyScannerApp')
 
         angular.forEach(devices, function (device) {
           $scope.devices.push({
+            id: device.id,
             serial: device.serial,
             hash: device.device_hash,
             label: device.label || 'iMAC'
@@ -31,6 +32,7 @@ angular.module('energyScannerApp')
 
         if (!User.getInfo().device_hash) {
           User.setInfo({
+            device_id: ($scope.devices[0] && $scope.devices[0].id) || '',
             device_hash: ($scope.devices[0] && $scope.devices[0].hash) || ''
           });
         }
