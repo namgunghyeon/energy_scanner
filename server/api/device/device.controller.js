@@ -7,8 +7,8 @@ var connection = mysql.createConnection(_.extend(env.MYSQL));
 var request = require('request');
 
 function selectQueryDevice(queryInfos) {
-  var sql = 'SELECT serial, device_hash, label FROM user_device' +
-    ' WHERE user_email =   \'' + queryInfos.email + ' \'';
+  var sql = 'SELECT id, serial, device_hash, label FROM user_device' +
+    ' WHERE user_email =   \'' + queryInfos.email + '\'';
 
   return sql;
 }
@@ -55,6 +55,7 @@ exports.selectDeviceInfo = function(req, res) {
     if (err) {
       res.json(err);
     }
+
     res.json(results);
   });
 };
