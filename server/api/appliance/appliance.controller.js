@@ -12,7 +12,12 @@ function insertQueryUserAppliance(queryInfos) {
 }
 
 function selectQueryUserAppliance(queryInfos) {
-  var sql = 'SELECT * '+
+  var sql = 'SELECT A.id, A.user_appliance_type_id,' + 
+    '               A.user_device_id,' +
+    '               A.model, A.mode1,' + 
+    '               A.mode2, B.user_email,' + 
+    '               B.serial, B.device_hash,' +
+    '               B.label '+
     ' FROM user_appliance AS A' +
     '  INNER JOIN user_device AS B' +
     '          ON A.user_device_id = B.id' +
