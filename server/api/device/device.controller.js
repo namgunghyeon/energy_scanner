@@ -24,6 +24,19 @@ function insertQueryDevice(queryInfos) {
   return sql;
 }
 
+function hexToDecimal(serial) {
+  var str = serial.slice(0, 8);
+  return parseInt(str, 16);
+}
+
+function selectDeviceHash(serialNumber) {
+  var sql = 'SELECT device_hash.hash FROM device' +
+      ' JOIN device_hash' +
+      ' ON device.id = device_hash.device_id' +
+      ' WHERE serialNumber = ' + serialNumber;
+  return sql;
+}
+
 exports.selectDeviceInfo = function(req, res) {
   var email = req.params.email || null;
 
@@ -108,6 +121,57 @@ exports.getRealtimeUsage = function (req, res) {
     if (err) {
       res.status(statusCode).send(err);
     } else {
+      res.status(statusCode).send(body);
+    }
+
+  });
+
+};
+
+exports.findDeviceHash = function (req, res) {
+
+  var serial = req.query.serial,
+    serialNumber = hexToDecimal(serial),
+    sql = selectDeviceHash(serialNumber),
+    connection =  mysql.createConnection(_.extend(env.MYSQL_PRODUCTION));
+
+  connection.query(sql, function (err, results) {
+
+    if (err) {
+      res.json(err);
+    }
+    res.json(results);
+  });
+
+};
+
+exports.newDeviceHash = function (req, res) {
+
+  var serial = req.body.serial,
+    registerInfo = {
+      email: env.DEMO_EMAIL,
+      serialNumber: hexToDecimal(serial)
+    },
+    encodedApiKey = env.API.ADMIN_KEY,
+    endpoint = env.API.DOMAIN + '/1.1/devices/basicinfo/register?apikey=' + encodedApiKey;
+
+  request({
+    method: 'POST',
+    url: endpoint,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + encodedApiKey
+    },
+    body: registerInfo,
+    json: true
+  }, function (err, response, body) {
+
+    var statusCode = response.statusCode;
+
+    if (err) {
+      res.status(statusCode).send(err);
+    } else {
+      console.log('register device: ', body);
       res.status(statusCode).send(body);
     }
 

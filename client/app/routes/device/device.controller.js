@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('DeviceCtrl', function ($scope, Device, User, $window, $log) {
+  .controller('DeviceCtrl', function ($scope, Device, User, $state, $window, $log) {
 
     $scope.back = {
       stateName: 'scanEnergy',
@@ -15,21 +15,30 @@ angular.module('energyScannerApp')
       },
       confirm: function (newDevice) {
 
-        if (Object.keys(newDevice).length === 2) {
+        if (newDevice.serial) {
 
-          newDevice.hash = newDevice.hash || 'dbe711ffa537b83b135f37fd64c309682985fd53';  // 테스트용 iMAC
+          Device.getHash(newDevice.serial).then(function (response) {
 
-          Device.setDevice(newDevice).success(function (response) {
+            newDevice.hash = response.hash;
 
-            if (response === 200 || response === '200') {
-              $scope.init();
-            } else {
-              throw Error('Set device failed');
-            }
+            Device.setDevice(newDevice).success(function (response) {
 
-          }).error(function (response) {
-            $log.error('Set device: ', response);
+              if (response === 200 || response === '200') {
+                $scope.init();
+              } else {
+                throw Error('Set device failed');
+              }
+
+            }).error(function (response) {
+              $log.error('Set device: ', response);
+            });
+
+          }).catch(function (response) {
+            $window.alert('디바이스 등록 중 에러가 발생했습니다.');
+            $log.error('Device get hash: ', response);
           });
+
+
         } else {
           $window.alert('등록할 디바이스 정보를 입력해주세요.');
         }
@@ -43,16 +52,30 @@ angular.module('energyScannerApp')
 
     $scope.selectDevice = function (device) {
       $scope.selected.device = device;
+    };
 
-      User.setInfo({
-        device_hash: $scope.selected.device.hash
-      });
+    $scope.goToScanEnergy = function () {
+
+      if ($scope.selected.device) {
+        User.setInfo({
+          device_hash: $scope.selected.device.hash
+        });
+
+        $state.go('scanEnergy');
+
+      } else {
+        $window.alert('디바이스를 선택해주세요!');
+      }
+
     };
 
     $scope.init = function () {
 
+      var selectedDeviceHash = User.getInfo().device_hash;
+
       $scope.newDevice = {};
       $scope.showRegisterForm = false;
+      $scope.selected = {};
 
       Device.getDevices().success(function (devices) {
 
@@ -64,13 +87,16 @@ angular.module('energyScannerApp')
             hash: device.device_hash,
             label: device.label
           });
+
         });
 
         $scope.hasDevices = !!$scope.devices.length;
 
-        $scope.selected = {
-          device: $scope.devices[0] || {}
-        };
+        angular.forEach($scope.devices, function (device) {
+          if (selectedDeviceHash === device.hash) {
+            $scope.selected.device = device;
+          }
+        });
 
       }).error(function (response) {
         $log.error('Get devices: ', response);

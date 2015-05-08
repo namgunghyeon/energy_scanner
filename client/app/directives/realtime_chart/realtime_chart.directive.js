@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .directive('realtimeChart', function (Device, Scanner, $interval, $rootScope) {
+  .directive('realtimeChart', function (Device, Scanner, $interval, $rootScope, $log) {
     return {
       templateUrl: 'app/directives/realtime_chart/realtime_chart.html',
       restrict: 'EA',

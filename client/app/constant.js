@@ -10,6 +10,8 @@ angular.module('energyScannerApp')
         return '/api/devices/' + email;
       },
       'DEVICE_REALTIME': '/api/devices/realtime',
+      'FIND_DEVICE_HASH': '/api/devices/findHash',
+      'NEW_DEVICE_HASH': '/api/devices/newHash',
       'APPLIANCE_TYPES' : function (email) {
         return '/api/appliances/' + email + '/applianceType';
       },

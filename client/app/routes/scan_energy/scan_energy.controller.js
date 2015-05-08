@@ -29,9 +29,11 @@ angular.module('energyScannerApp')
 
         $scope.hasDevices = !!$scope.devices.length;
 
-        User.setInfo({
-          device_hash: ($scope.devices[0] && $scope.devices[0].hash) || ''
-        });
+        if (!User.getInfo().device_hash) {
+          User.setInfo({
+            device_hash: ($scope.devices[0] && $scope.devices[0].hash) || ''
+          });
+        }
 
         $scope.isActive = true;
 
