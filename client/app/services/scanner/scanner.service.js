@@ -39,7 +39,7 @@ angular.module('energyScannerApp')
 
         var update = $interval(function () {
 
-          if (this.isScanned) {
+          if (this.isScanned || this.recordingTime > 7200000) {
             $interval.cancel(update);
           } else {
             this.recordingTime = Date.now() - this.startTime;
