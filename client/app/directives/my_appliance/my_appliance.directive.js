@@ -65,6 +65,9 @@ angular.module('energyScannerApp')
                 marker: {
                   enabled: false
                 }
+              },
+              series: {
+                turboThreshold: 3600
               }
             },
             series: [
@@ -96,7 +99,7 @@ angular.module('energyScannerApp')
             },
             totalUsage: info.totalUsage
           };
-          debugger;
+
           ScanHistory.getScanRawData(info.scan_id).success(function (response) {
 
             if (response.code === 200) {

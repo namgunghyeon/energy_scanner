@@ -38,6 +38,12 @@ angular.module('energyScannerApp')
               enabled: false
             },
 
+            plotOptions: {
+              series: {
+                turboThreshold: 3600
+              }
+            },
+
             series : [{
               name : 'Scan data',
               data : data,

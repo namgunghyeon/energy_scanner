@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('ScanSettingCtrl', function ($scope, appliance, Scanner, User, $state, $timeout, $log) {
+  .controller('ScanSettingCtrl', function ($scope, appliance, Scanner, User, $state, $timeout, $window, $log) {
 
     if (!User.isLoggedIn()) {
       $state.go('intro');
@@ -44,8 +44,11 @@ angular.module('energyScannerApp')
 
         if (option.id === 'timer') {
           $timeout($scope.scanComplete, option.minutes * 60000);
+        } else {
+          $timeout($scope.scanComplete, 7200000);
         }
 
+        $window.alert('스캔은 최대 2시간까지 가능합니다!');
         $scope.scanner.start(option);
       };
 

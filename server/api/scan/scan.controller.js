@@ -62,8 +62,10 @@ exports.selectScanHistory = function(req, res) {
 
     if (err) {
       res.json(err);
+    } else {
+      res.json(results);
     }
-    res.json(results);
+
   });
 };
 
@@ -105,12 +107,12 @@ exports.insertScanHistory = function(req, res) {
   connection.query(sql, function (err, result) {
     if (err) {
       res.json(err);
+    } else {
+      res.json({
+        code: 200,
+        scanId: result.insertId
+      });
     }
-
-    res.json({
-      code: 200,
-      scanId: result.insertId
-    });
 
   });
 };

@@ -54,9 +54,10 @@ exports.selectDeviceInfo = function(req, res) {
 
     if (err) {
       res.json(err);
+    } else {
+      res.json(results);
     }
 
-    res.json(results);
   });
 };
 
@@ -92,11 +93,11 @@ exports.insertDeviceInfo = function(req, res) {
 
     connection.query(sql, function (err, results) {
 
-    if (err) {
-      throw err;
-    }
-
-    res.json('200');
+      if (err) {
+        throw err;
+      } else {
+        res.json('200');
+      }
 
     });
 };
@@ -140,8 +141,10 @@ exports.findDeviceHash = function (req, res) {
 
     if (err) {
       res.json(err);
+    } else {
+      res.json(results);
     }
-    res.json(results);
+
   });
 
 };
