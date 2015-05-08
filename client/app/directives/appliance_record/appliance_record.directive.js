@@ -16,7 +16,13 @@ angular.module('energyScannerApp')
           $log.info('record: ', scope.record);
           if (scannedAt) {
             scope.duration = scope.record.scannedAt.end - scope.record.scannedAt.start;
-            scope.durationFormat = 'mm' + '분 ' + 'ss' + '초 동안 측정';
+
+            if (scope.duration > 3600000) {
+              scope.durationFormat = 'hh' + '시간 ';
+            } else {
+              scope.durationFormat = '';
+            }
+            scope.durationFormat += 'mm' + '분 ' + 'ss' + '초 동안 측정';
           }
 
         });
