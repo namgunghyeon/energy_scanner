@@ -135,8 +135,7 @@ angular.module('energyScannerApp')
                 },
                 text: 'W',
                 y: -10
-              },
-              tickInterval: 10
+              }
             },
             tooltip: {
               enabled: false
