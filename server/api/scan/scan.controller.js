@@ -7,6 +7,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection(_.extend(env.MYSQL));
 var fs = require('fs');
 var path = require('path');
+var upload = require('../../lib/s3');
 
 function insertQueryScanHistory(queryInfos) {
   var sql = 'INSERT INTO scan_history(user_appliance_id, start, end, totalUsage)'+
@@ -119,8 +120,7 @@ exports.insertScanHistory = function(req, res) {
 
 exports.selectScanRawData = function(req, res) {
   var email = req.params.email || null,
-    scanId = req.query.scanId || null,
-    filePath = path.join(config.root, 'server/data/');
+    scanId = req.query.scanId || null;
 
   if (email === null ) {
     res.send('not found email');
@@ -132,8 +132,7 @@ exports.selectScanRawData = function(req, res) {
     return;
   }
 
-  fs.readFile(filePath + scanId + '.json', { encoding: 'utf8' }, function (err, data) {
-
+  upload.getObject(scanId + '.json', function (err, data) {
     if (err) {
       res.status(400).send({
         code: 400,
@@ -144,18 +143,17 @@ exports.selectScanRawData = function(req, res) {
       res.status(200).send({
         code: 200,
         message: 'Read data success',
-        detail: JSON.parse(data)
+        detail: JSON.parse(data.Body || null)
       });
     }
-
   });
+
 };
 
 exports.insertScanRawData = function(req, res) {
   var applianceId = req.body.applianceId || null,
     scanId = req.body.scanId || null,
     rawData = req.body.rawData || [],
-    filePath = path.join(config.root, 'server/data/'),
     json;
 
   if (applianceId === null) {
@@ -187,8 +185,7 @@ exports.insertScanRawData = function(req, res) {
     data: rawData
   };
 
-  fs.writeFile(filePath + scanId + '.json', JSON.stringify(json), function (err) {
-
+  upload.putObject(scanId + '.json', JSON.stringify(json), function (err, data) {
     if (err) {
       res.status(500).send({
         code: 500,
@@ -198,11 +195,10 @@ exports.insertScanRawData = function(req, res) {
     } else {
       res.status(200).send({
         code: 200,
-        message: 'Write data success'
+        message: 'Write data success',
+        detail: data
       });
     }
-
   });
-
 
 };
