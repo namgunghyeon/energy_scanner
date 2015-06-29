@@ -1,0 +1,548 @@
+/**
+ * App-wide Styles
+ */
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+html, body {
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
+  height: 100%;
+  margin: 0; }
+  html h1, html h2, html h3, html h4, html h5, html h6, html p, body h1, body h2, body h3, body h4, body h5, body h6, body p {
+    margin: 0; }
+  html ul, body ul {
+    margin: 0;
+    list-style: none;
+    padding-left: 0; }
+  html button, html input[type="button"], body button, body input[type="button"] {
+    -webkit-appearance: none;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer; }
+  html input.text, html input[type="password"], html input[type="submit"], body input.text, body input[type="password"], body input[type="submit"] {
+    -webkit-appearance: none;
+    outline: 0; }
+  html .container, body .container {
+    margin: 60px auto 100px;
+    overflow: visible;
+    padding: 0 2%; }
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px; } }
+.navbar-container {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background-color: #129fdd;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10; }
+  .navbar-container back-button {
+    position: absolute;
+    left: 10px; }
+
+.analysis-chart-container {
+  position: relative;
+  padding: 10px; }
+
+.back-button-container {
+  display: inline-block;
+  cursor: pointer;
+  color: #fff; }
+  .back-button-container:hover {
+    opacity: 0.9; }
+  .back-button-container .back-icon {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background: url("../assets/images/img_arr.png") no-repeat center;
+    vertical-align: middle; }
+
+.loading-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; }
+  .loading-container .loading-icon {
+    display: inline-block;
+    width: 40px;
+    height: 65px;
+    background: url("../assets/images/loader.gif") no-repeat center;
+    background-size: 100% 100%; }
+    @media (-webkit-min-device-pixel-ratio: 2) {
+      .loading-container .loading-icon {
+        background-image: url("../assets/images/loader@2x.gif"); } }
+
+.my-appliance-container {
+  overflow: auto;
+  margin-bottom: 20px;
+  cursor: pointer; }
+  .my-appliance-container:hover {
+    background-color: #ddd; }
+  .my-appliance-container .scan-graph, .my-appliance-container .scan-record {
+    float: left;
+    min-height: 120px;
+    clear: right; }
+  .my-appliance-container .scan-graph {
+    width: 40%;
+    border: 1px solid #000; }
+    .my-appliance-container .scan-graph img {
+      width: 100%;
+      height: 100%; }
+  .my-appliance-container .scan-record {
+    width: 60%;
+    padding-left: 2%; }
+    .my-appliance-container .scan-record h4, .my-appliance-container .scan-record p {
+      margin: 0; }
+
+.realtime-chart-container {
+  position: relative;
+  padding: 10px; }
+
+.setting-button-container {
+  height: 60px;
+  float: right;
+  position: relative; }
+  .setting-button-container .icon {
+    width: 40px;
+    height: 60px;
+    display: inline-block;
+    background: url("../assets/images/btn_set.png") no-repeat center;
+    background-size: 40px 40px;
+    vertical-align: middle;
+    cursor: pointer; }
+    .setting-button-container .icon:hover {
+      background-color: #0b89dd; }
+  .setting-button-container .popup {
+    position: absolute;
+    top: 30px;
+    right: 5px;
+    width: 100px;
+    text-align: center;
+    border: 1px solid #129fdd;
+    background-color: #fff; }
+    .setting-button-container .popup .item {
+      color: #798ca7;
+      cursor: pointer; }
+      .setting-button-container .popup .item:hover {
+        color: #395b77; }
+
+.sign-in-container input.text, .sign-in-container input[type="password"], .sign-in-container input[type="submit"] {
+  padding: 12px;
+  font-size: 14px; }
+.sign-in-container .email-form input, .sign-in-container .password-form input {
+  width: 100%;
+  color: #395B77;
+  background-color: #f6f9fb;
+  border: 1px solid #d4dee5; }
+  .sign-in-container .email-form input:focus, .sign-in-container .password-form input:focus {
+    border: 1px solid #129fdd; }
+.sign-in-container .email-form input {
+  margin-bottom: 8px; }
+.sign-in-container .keep-login-form {
+  margin-top: 18px;
+  margin-bottom: 18px;
+  font-size: 12px;
+  color: #798ca7; }
+  .sign-in-container .keep-login-form input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: middle; }
+.sign-in-container .login-button input[type="submit"] {
+  width: 100%;
+  color: #fff;
+  background-color: #129fdd;
+  border: 0;
+  cursor: pointer; }
+  .sign-in-container .login-button input[type="submit"]:hover {
+    background-color: #395b77; }
+.sign-in-container .text-warn {
+  color: #ff6162; }
+
+.appliance-container {
+  padding-top: 100px;
+  color: #395B77; }
+  .appliance-container header .title {
+    text-align: center; }
+  .appliance-container section .appliance-frame {
+    width: 50%;
+    float: left;
+    text-align: center;
+    padding-top: 50px; }
+    .appliance-container section .appliance-frame .appliance {
+      width: 50%;
+      margin: 0 auto;
+      cursor: pointer; }
+      .appliance-container section .appliance-frame .appliance img {
+        display: inline-block;
+        width: 50%;
+        min-width: 60px;
+        opacity: 0.8; }
+      .appliance-container section .appliance-frame .appliance p {
+        color: #798ca7; }
+      .appliance-container section .appliance-frame .appliance:hover img {
+        opacity: 1; }
+      .appliance-container section .appliance-frame .appliance:hover p {
+        color: #395B77; }
+    .appliance-container section .appliance-frame.setting {
+      width: 100%; }
+      .appliance-container section .appliance-frame.setting .appliance {
+        width: 30%; }
+      .appliance-container section .appliance-frame.setting .appliance-setting {
+        padding-top: 20px; }
+        .appliance-container section .appliance-frame.setting .appliance-setting .model, .appliance-container section .appliance-frame.setting .appliance-setting .mode, .appliance-container section .appliance-frame.setting .appliance-setting .name {
+          margin-top: 8px; }
+          .appliance-container section .appliance-frame.setting .appliance-setting .model h4, .appliance-container section .appliance-frame.setting .appliance-setting .mode h4, .appliance-container section .appliance-frame.setting .appliance-setting .name h4 {
+            text-align: left; }
+          .appliance-container section .appliance-frame.setting .appliance-setting .model input[type="text"], .appliance-container section .appliance-frame.setting .appliance-setting .model input.text, .appliance-container section .appliance-frame.setting .appliance-setting .mode input[type="text"], .appliance-container section .appliance-frame.setting .appliance-setting .mode input.text, .appliance-container section .appliance-frame.setting .appliance-setting .name input[type="text"], .appliance-container section .appliance-frame.setting .appliance-setting .name input.text {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            color: #395B77;
+            background-color: #f6f9fb;
+            border: 1px solid #d4dee5; }
+            .appliance-container section .appliance-frame.setting .appliance-setting .model input[type="text"]:focus, .appliance-container section .appliance-frame.setting .appliance-setting .model input.text:focus, .appliance-container section .appliance-frame.setting .appliance-setting .mode input[type="text"]:focus, .appliance-container section .appliance-frame.setting .appliance-setting .mode input.text:focus, .appliance-container section .appliance-frame.setting .appliance-setting .name input[type="text"]:focus, .appliance-container section .appliance-frame.setting .appliance-setting .name input.text:focus {
+              border: 1px solid #129fdd; }
+        .appliance-container section .appliance-frame.setting .appliance-setting .start-button {
+          width: 50%;
+          margin: 30px auto 0;
+          padding: 16px;
+          font-size: 20px;
+          cursor: pointer;
+          color: #798ca7; }
+          .appliance-container section .appliance-frame.setting .appliance-setting .start-button .icon {
+            display: inline-block;
+            width: 8px;
+            height: 11px;
+            background: url("../assets/images/img_next.png") no-repeat center;
+            background-size: 100% 100%; }
+          .appliance-container section .appliance-frame.setting .appliance-setting .start-button:hover {
+            color: #395B77; }
+
+.device-container {
+  padding-top: 100px;
+  color: #395b77; }
+  .device-container header .title {
+    text-align: center; }
+  .device-container section .device-list {
+    padding-top: 30px;
+    text-align: center; }
+    .device-container section .device-list li {
+      height: 50px;
+      line-height: 50px; }
+      .device-container section .device-list li input[type="radio"] {
+        width: 12px;
+        height: 12px;
+        margin-right: 10px;
+        outline: 0;
+        -webkit-appearance: none;
+        background: url("../assets/images/checkbox_off.png") no-repeat center;
+        background-size: 100% 100%;
+        vertical-align: middle; }
+        @media (-webkit-min-device-pixel-ratio: 2) {
+          .device-container section .device-list li input[type="radio"] {
+            background-image: url("../assets/images/checkbox_off@2x.png"); } }
+      .device-container section .device-list li.on {
+        background-color: #d0d0d0; }
+        .device-container section .device-list li.on input[type="radio"] {
+          background-image: url("../assets/images/checkbox_on_blue.png"); }
+          @media (-webkit-min-device-pixel-ratio: 2) {
+            .device-container section .device-list li.on input[type="radio"] {
+              background-image: url("../assets/images/checkbox_on_blue@2x.png"); } }
+  .device-container section .register {
+    margin-top: 50px;
+    text-align: center; }
+    .device-container section .register .register-button {
+      display: inline-block;
+      font-size: 18px;
+      padding: 12px;
+      color: #129fdd; }
+      .device-container section .register .register-button:visited {
+        color: #129fdd; }
+      .device-container section .register .register-button:hover {
+        color: #395b77; }
+    .device-container section .register .register-form .serial, .device-container section .register .register-form .hash, .device-container section .register .register-form .label {
+      margin-top: 8px; }
+      .device-container section .register .register-form .serial input, .device-container section .register .register-form .hash input, .device-container section .register .register-form .label input {
+        width: 100%;
+        color: #395B77;
+        background-color: #f6f9fb;
+        border: 1px solid #d4dee5;
+        padding: 12px;
+        font-size: 14px; }
+        .device-container section .register .register-form .serial input:focus, .device-container section .register .register-form .hash input:focus, .device-container section .register .register-form .label input:focus {
+          border: 1px solid #129fdd; }
+    .device-container section .register .register-form .buttons {
+      text-align: center;
+      margin-top: 10px; }
+      .device-container section .register .register-form .buttons .cancel, .device-container section .register .register-form .buttons .confirm {
+        width: 40%;
+        padding: 16px;
+        font-size: 14px; }
+        .device-container section .register .register-form .buttons .cancel:before, .device-container section .register .register-form .buttons .confirm:before {
+          display: inline-block;
+          width: 10px;
+          height: 10px; }
+      .device-container section .register .register-form .buttons .cancel {
+        margin-right: 5%;
+        border: 1px solid #d4dee5;
+        color: #798ca7; }
+        .device-container section .register .register-form .buttons .cancel:hover {
+          color: #395B77; }
+      .device-container section .register .register-form .buttons .confirm {
+        color: #fff;
+        background-color: #129fdd; }
+        .device-container section .register .register-form .buttons .confirm:hover {
+          background-color: #395b77; }
+  .device-container section .continue {
+    margin-top: 50px; }
+    .device-container section .continue .continue-button {
+      width: 100%;
+      font-size: 18px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      color: #fff;
+      background-color: #129fdd; }
+      .device-container section .continue .continue-button:hover {
+        background-color: #395b77; }
+
+.intro-container {
+  width: 80%;
+  margin: 0 auto; }
+  .intro-container .title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #395B77;
+    margin-top: 58px;
+    margin-bottom: 10px;
+    text-align: center; }
+  .intro-container .signup-container {
+    text-align: center; }
+    .intro-container .signup-container .signup-button {
+      display: inline-block;
+      width: 100%;
+      font-size: 14px;
+      color: #129fdd;
+      margin-top: 8px;
+      padding: 12px; }
+      .intro-container .signup-container .signup-button:hover {
+        color: #395b77; }
+
+.main-container {
+  padding-top: 100px; }
+  .main-container .box {
+    font-size: 30px;
+    color: #798ca7;
+    margin: 0 auto 50px;
+    padding: 20px 0;
+    cursor: pointer;
+    border: 1px solid #129fdd;
+    text-align: center; }
+    .main-container .box:hover {
+      color: #395b77; }
+    .main-container .box .record-timer {
+      font-size: 18px; }
+      .main-container .box .record-timer .icon {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: #B76868; }
+
+.my-appliance-detail-container header {
+  height: 50px;
+  line-height: 50px; }
+  .my-appliance-detail-container header button {
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #555;
+    color: #fff; }
+.my-appliance-detail-container section .appliance-detail-chart {
+  height: 300px;
+  border: 1px solid #000; }
+.my-appliance-detail-container section .appliance-detail-record {
+  margin-top: 20px; }
+
+.scan-energy-container {
+  padding-top: 100px;
+  color: #395b77; }
+  .scan-energy-container section .realtime-graph {
+    height: 300px;
+    line-height: 300px;
+    border: 1px solid #129fdd;
+    margin: 10px auto;
+    text-align: center;
+    position: relative; }
+    .scan-energy-container section .realtime-graph .blur-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("../assets/images/blur_layer.png") no-repeat center;
+      background-size: 100% 100%;
+      z-index: 1; }
+  .scan-energy-container section .connect-button, .scan-energy-container section .scan-button {
+    width: 100%;
+    font-size: 18px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer; }
+  .scan-energy-container section .connect-button {
+    color: #129fdd;
+    background-color: #fff;
+    margin-bottom: 8px; }
+    .scan-energy-container section .connect-button:hover {
+      color: #fff;
+      background-color: #395b77; }
+    .scan-energy-container section .connect-button .scan-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background: url("../assets/images/img_conncet.png") no-repeat center;
+      background-size: 100% 100%;
+      vertical-align: middle;
+      margin-right: 8px; }
+      @media (-webkit-min-device-pixel-ratio: 2) {
+        .scan-energy-container section .connect-button .scan-icon {
+          background-image: url("../assets/images/img_conncet@2x.png"); } }
+  .scan-energy-container section .scan-button {
+    color: #fff;
+    background-color: #129fdd;
+    border: 0; }
+    .scan-energy-container section .scan-button:hover {
+      background-color: #395b77; }
+
+.scan-history-container header {
+  line-height: 50px; }
+
+.scan-result-container {
+  padding-top: 100px;
+  color: #395b77; }
+  .scan-result-container section .analysis-graph {
+    height: 300px;
+    line-height: 300px;
+    border: 1px solid #129fdd;
+    margin: 10px auto;
+    text-align: center; }
+  .scan-result-container section .record-result {
+    text-align: center;
+    margin-top: 30px; }
+    .scan-result-container section .record-result .buttons {
+      margin-top: 20px; }
+      .scan-result-container section .record-result .buttons .scan-button {
+        width: 40%;
+        padding: 16px;
+        font-size: 14px; }
+        .scan-result-container section .record-result .buttons .scan-button.save {
+          color: #fff;
+          background-color: #129fdd; }
+          .scan-result-container section .record-result .buttons .scan-button.save:hover {
+            background-color: #395b77; }
+        .scan-result-container section .record-result .buttons .scan-button.cancel {
+          margin-right: 5%;
+          border: 1px solid #d4dee5;
+          color: #798ca7; }
+          .scan-result-container section .record-result .buttons .scan-button.cancel:hover {
+            color: #395B77; }
+
+.scan-setting-container {
+  padding-top: 100px;
+  color: #395b77; }
+  .scan-setting-container section .realtime-graph {
+    height: 300px;
+    line-height: 300px;
+    border: 1px solid #129fdd;
+    margin: 10px auto;
+    text-align: center;
+    position: relative; }
+    .scan-setting-container section .realtime-graph .blur-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("../assets/images/blur_layer.png") no-repeat center;
+      background-size: 100% 100%;
+      z-index: 1; }
+  .scan-setting-container section .setting {
+    margin-top: 30px;
+    text-align: center; }
+    .scan-setting-container section .setting .record-option {
+      width: 50%;
+      margin: 20px auto; }
+      .scan-setting-container section .setting .record-option .option-wrapper {
+        border: 1px solid #d4dee5;
+        border-radius: 10px;
+        text-align: center; }
+        .scan-setting-container section .setting .record-option .option-wrapper .option {
+          padding: 5px;
+          cursor: pointer; }
+          .scan-setting-container section .setting .record-option .option-wrapper .option .icon {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            content: "";
+            margin-right: 10px; }
+          .scan-setting-container section .setting .record-option .option-wrapper .option.checked {
+            background-color: #d4dee5; }
+            .scan-setting-container section .setting .record-option .option-wrapper .option.checked .icon {
+              background: url("../assets/images/img_complete.png") no-repeat center;
+              background-size: 100% 100%; }
+      .scan-setting-container section .setting .record-option .timer {
+        margin-top: 10px;
+        text-align: right; }
+        .scan-setting-container section .setting .record-option .timer input[type="text"] {
+          border: 1px solid #d4dee5;
+          padding: 6px; }
+          .scan-setting-container section .setting .record-option .timer input[type="text"]:focus {
+            border: 1px solid #129fdd; }
+    .scan-setting-container section .setting .record-button.start {
+      width: 60px;
+      height: 40px;
+      margin-top: 10px;
+      background: url("../assets/images/img_record.png") no-repeat center;
+      background-size: 100% 100%; }
+      .scan-setting-container section .setting .record-button.start:hover {
+        opacity: 0.9; }
+      @media (-webkit-min-device-pixel-ratio: 2) {
+        .scan-setting-container section .setting .record-button.start {
+          background-image: url("../assets/images/img_record@2x.png"); } }
+    .scan-setting-container section .setting .recording {
+      height: 40px;
+      line-height: 40px; }
+      .scan-setting-container section .setting .recording .record-timer .icon {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: #B76868; }
+      .scan-setting-container section .setting .recording .record-button.stop {
+        width: 60px;
+        height: 40px;
+        margin-top: 10px;
+        background: url("../assets/images/img_record_stop.png") no-repeat center;
+        background-size: 100% 100%; }
+        .scan-setting-container section .setting .recording .record-button.stop:hover {
+          opacity: 0.9; }
+        @media (-webkit-min-device-pixel-ratio: 2) {
+          .scan-setting-container section .setting .recording .record-button.stop {
+            background-image: url("../assets/images/img_record_stop@2x.png"); } }
+
+/*# sourceMappingURL=app.css.map */

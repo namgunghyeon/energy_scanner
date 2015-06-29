@@ -31,11 +31,13 @@ angular.module('energyScannerApp')
         this.recordingTime = 0;
         this.totalUsage = 0;
         this.datastore = [];
+        this.appliance = {};
       },
 
-      start: function () {
+      start: function (appliance) {
         this.isScanning = true;
         this.startTime = Date.now();
+        this.appliance = appliance;
 
         var update = $interval(function () {
 
@@ -54,6 +56,7 @@ angular.module('energyScannerApp')
         this.isScanned = true;
         this.endTime = Date.now();
         this.totalUsage = getTotalUsage(this.datastore);
+        this.appliance = {};
       },
 
       saveHistory: function (appliance) {

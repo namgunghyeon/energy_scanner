@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('energyScannerApp')
-  .controller('MyApplianceDetailCtrl', function ($scope, scanId, ScanHistory, User, $state, $q, $log) {
+  .controller('MyApplianceDetailCtrl', function ($scope, scanId, ScanHistory, User, Scanner, $state, $q, $log) {
 
     if (!User.isLoggedIn()) {
       $state.go('intro');
@@ -42,6 +42,20 @@ angular.module('energyScannerApp')
       }).catch(function (response) {
         $log.error('My appliance detail init: ', response);
       });
+
+    };
+
+    $scope.goToScanView = function () {
+
+      if (Scanner.isScanning) {
+        $state.go('scanSetting', {
+          appliance: angular.toJson(Scanner.appliance)
+        }, {
+          location: false
+        });
+      } else {
+        $state.go('scanEnergy');
+      }
 
     };
 

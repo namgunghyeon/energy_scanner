@@ -1,9 +1,9 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
+<div ng-include="'app/components/navbar/navbar.html'"></div>
 
 <div class="my-appliance-detail-container" ng-init="init()">
 
   <header>
-    <h3>Analyze My Appliance<button ui-sref="scanEnergy">Scan Energy</button></h3>
+    <h3>Analyze My Appliance<button ng-click="goToScanView()">Scan Energy</button></h3>
   </header>
 
   <section>

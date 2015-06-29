@@ -11,16 +11,22 @@
     text-align: center;
   }
 
-  .signup-button {
-    width: 100%;
-    font-size: 14px;
-    color: #129fdd;
-    margin-top: 8px;
-    padding: 12px;
+  .signup-container {
+    text-align: center;
 
-    &:hover {
-      color: #395b77;
+    .signup-button {
+      display: inline-block;
+      width: 100%;
+      font-size: 14px;
+      color: #129fdd;
+      margin-top: 8px;
+      padding: 12px;
+
+      &:hover {
+        color: #395b77;
+      }
     }
   }
+
 
 }

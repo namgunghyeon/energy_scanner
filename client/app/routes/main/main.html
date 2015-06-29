@@ -1,4 +1,4 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
+<div ng-include="'app/components/navbar/navbar.html'"></div>
 
 <div class="main-container">
 
@@ -6,8 +6,11 @@
     Scanned List
   </div>
 
-  <div class="box scan-energy" ui-sref="scanEnergy">
+  <div class="box scan-energy" ng-click="goToScanView()">
     Scan Energy
+    <div class="record-timer" ng-if="scanner.isScanning">
+      <span class="icon"></span> {{(scanner.recordingTime | date: 'HH:mm:ss': 'UTC') || '00:00:00'}}
+    </div>
   </div>
 
 </div>
