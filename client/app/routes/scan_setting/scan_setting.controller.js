@@ -9,8 +9,8 @@ angular.module('energyScannerApp')
     }
 
     $scope.back = {
-      stateName: 'appliance',
-      label: 'Appliance List'
+      stateName: 'main',
+      label: 'Home'
     };
 
     $scope.recordOptions = [
@@ -33,7 +33,10 @@ angular.module('energyScannerApp')
 
       $scope.appliance = appliance;
       $scope.scanner = Scanner;
-      $scope.scanner.init();
+
+      if (!$scope.scanner.isScanning) {
+        $scope.scanner.init();
+      }
 
       $scope.chart = {
         mode: 'scan',
@@ -42,11 +45,6 @@ angular.module('energyScannerApp')
 
       $scope.scanStart = function (option) {
 
-        //$scope.chart = {
-        //  mode: 'scan',
-        //  isActive: true
-        //};
-
         if (option.id === 'timer') {
           $timeout($scope.scanComplete, option.minutes * 60000);
         } else {
@@ -54,7 +52,7 @@ angular.module('energyScannerApp')
         }
 
         $window.alert('스캔은 최대 2시간까지 가능합니다!');
-        $scope.scanner.start(option);
+        $scope.scanner.start($scope.appliance);
       };
 
       $scope.scanComplete = function () {

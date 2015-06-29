@@ -54,7 +54,7 @@ angular.module('energyScannerApp')
 
             yAxis: {
               title: {
-                text: 'mW',
+                text: 'W',
                 align: 'high',
                 textAlign: 'left',
                 rotation: 0

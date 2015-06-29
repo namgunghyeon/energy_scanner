@@ -1,6 +1,6 @@
 <div class="setting-button-container">
   <span class="icon" ng-click="popup()"></span>
   <div class="popup" ng-show="showPopup">
-    <div class="item" ng-repeat="item in settings" ng-bind="item.label" ui-sref="{{item.stateName}}"></div>
+    <div class="item" ng-repeat="item in settings" ng-bind="item.label" ng-click="signOut()"></div>
   </div>
 </div>

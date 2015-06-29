@@ -1,3 +1,56 @@
-<div class="col-md-12">
-This is the sign_up view.
+<div class="signup-wrapper">
+  <div class="signup-container">
+
+    <div class="logo-container">
+      <div class="empty"></div>
+      <img src="/assets/images/logo_signup.png">
+      <div class="logo-text" ng-bind="text.title"></div>
+    </div>
+
+    <div class="form-container">
+      <form novalidate class="signup-form" ng-init="user = {}">
+
+        <div class="input-container">
+          <label for="signup-email" ng-bind="text.email"></label>
+          <input type="email" ng-model="user.email" id="signup-email">
+          <p class="text-error" ng-if="!isValid.email" ng-bind="text.invalid.email"></p>
+        </div>
+
+        <div class="input-container">
+          <label for="signup-name" ng-bind="text.name"></label>
+          <input type="text" ng-model="user.name" id="signup-name">
+          <p class="text-error" ng-if="!isValid.name" ng-bind="text.invalid.name"></p>
+        </div>
+
+        <div class="input-container">
+          <label for="signup-phone" ng-bind="text.phone"></label>
+          <input type="text" ng-model="user.phone" id="signup-phone">
+          <p class="text-error" ng-if="!isValid.phone" ng-bind="text.invalid.phone"></p>
+        </div>
+
+        <div class="input-container">
+          <label for="signup-password" ng-bind="text.password"></label>
+          <input type="password" ng-model="user.password" id="signup-password">
+          <p class="text-error" ng-if="!isValid.password" ng-bind="text.invalid.password"></p>
+        </div>
+
+        <div class="input-container">
+          <label for="signup-password-again" ng-bind="text.confirm"></label>
+          <input type="password" ng-model="user.passwordAgain" id="signup-password-again">
+          <p class="text-error" ng-if="!isValid.passwordAgain" ng-bind="text.invalid.confirm"></p>
+        </div>
+
+        <div class="consent-container">
+          <p>{{text.agree}} <a href ng-bind="text.consent" ng-click="showConsent()"></a></p>
+        </div>
+
+        <input type="submit" value="{{text.title}}" ng-disabled="doingSignUp"
+               ng-click="doValidation(user) && signUp(user)">
+
+      </form>
+    </div>
+
+    <span class="close-btn" ui-sref="intro"></span>
+  </div>
 </div>
+
