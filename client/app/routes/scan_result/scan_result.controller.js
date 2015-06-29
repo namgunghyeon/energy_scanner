@@ -67,7 +67,7 @@ angular.module('energyScannerApp')
         var properUnit = '';
 
         if (usage < 1000) {
-          properUnit += usage + ' mW';
+          properUnit += usage.toFixed(2) + ' mW';
         } else if (usage < 1000000) {
           properUnit += (usage / 1000).toFixed(2) + ' W';
         } else {

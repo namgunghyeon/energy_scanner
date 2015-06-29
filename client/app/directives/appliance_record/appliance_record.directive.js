@@ -17,10 +17,9 @@ angular.module('energyScannerApp')
           if (scannedAt) {
             scope.duration = scope.record.scannedAt.end - scope.record.scannedAt.start;
 
+            scope.durationFormat = '';
             if (scope.duration > 3600000) {
-              scope.durationFormat = 'hh' + '시간 ';
-            } else {
-              scope.durationFormat = '';
+              scope.durationFormat += 'hh' + '시간 ';
             }
             scope.durationFormat += 'mm' + '분 ' + 'ss' + '초 동안 측정';
           }
