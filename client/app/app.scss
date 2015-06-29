@@ -60,6 +60,7 @@ html, body {
 
 // Component styles are injected through grunt
 // injector
+@import 'components/navbar/navbar.scss';
 @import 'directives/analysis_chart/analysis_chart.scss';
 @import 'directives/appliance_record/appliance_record.scss';
 @import 'directives/back_button/back_button.scss';
@@ -78,5 +79,4 @@ html, body {
 @import 'routes/scan_result/scan_result.scss';
 @import 'routes/scan_setting/scan_setting.scss';
 @import 'routes/sign_up/sign_up.scss';
-@import '../components/navbar/navbar.scss';
 // endinjector

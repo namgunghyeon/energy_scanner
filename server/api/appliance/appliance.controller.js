@@ -12,10 +12,10 @@ function insertQueryUserAppliance(queryInfos) {
 }
 
 function selectQueryUserAppliance(queryInfos) {
-  var sql = 'SELECT A.id, A.user_appliance_type_id,' + 
+  var sql = 'SELECT A.id, A.user_appliance_type_id,' +
     '               A.user_device_id,' +
-    '               A.model, A.mode1,' + 
-    '               A.mode2, B.user_email,' + 
+    '               A.model, A.mode1,' +
+    '               A.mode2, B.user_email,' +
     '               B.serial, B.device_hash,' +
     '               B.label '+
     ' FROM user_appliance AS A' +
@@ -60,7 +60,7 @@ function insertUserAppliance(queryInfos, callback){
           callback(err);
         }
 
-        if (result != null || result != undefined) {
+        if (result !== null || result !== undefined) {
 
           var insertData = {
             id : result.insertId,
@@ -287,7 +287,7 @@ exports.insertNewApplianceType = function(req, res){
     return;
   }
 
-  if (appCode != 'A5') {
+  if (appCode !== 'A5') {
     res.json('appCode is not etc');
     return;
   }
@@ -305,7 +305,7 @@ exports.insertNewApplianceType = function(req, res){
     if (err) {
       throw err;
     }
-    if (result != null || results != undefined) {
+    if (result !== null || result !== undefined) {
 
       queryInfos.id = result.insertId;
       res.json(queryInfos);
