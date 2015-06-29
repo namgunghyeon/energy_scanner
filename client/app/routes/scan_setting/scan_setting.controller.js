@@ -35,12 +35,17 @@ angular.module('energyScannerApp')
       $scope.scanner = Scanner;
       $scope.scanner.init();
 
+      $scope.chart = {
+        mode: 'scan',
+        isActive: true
+      };
+
       $scope.scanStart = function (option) {
 
-        $scope.chart = {
-          mode: 'scan',
-          isActive: true
-        };
+        //$scope.chart = {
+        //  mode: 'scan',
+        //  isActive: true
+        //};
 
         if (option.id === 'timer') {
           $timeout($scope.scanComplete, option.minutes * 60000);
